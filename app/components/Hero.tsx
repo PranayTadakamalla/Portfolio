@@ -1,0 +1,383 @@
+"use client"
+
+import { useEffect, useRef } from "react"
+import { motion } from "framer-motion"
+import { GitlabIcon as GitHub, Linkedin, Mail, Cloud } from "lucide-react"
+import { smoothScrollTo } from "@/utils/smoothScroll"
+
+// Typing animation component
+const TypingAnimation = ({ text }: { text: string }) => {
+  return (
+    <motion.span
+      initial={{ opacity: 1 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.8 }}
+      className="inline-block"
+    >
+      {text.split("").map((char, index) => (
+        <motion.span
+          key={index}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: index * 0.05, duration: 0.1 }}
+        >
+          {char}
+        </motion.span>
+      ))}
+    </motion.span>
+  )
+}
+
+// Coding animation component
+const CodingAnimation = () => {
+  const canvasRef = useRef<HTMLCanvasElement>(null)
+
+  useEffect(() => {
+    const canvas = canvasRef.current
+    if (!canvas) return
+
+    const ctx = canvas.getContext("2d")
+    if (!ctx) return
+
+    // Set canvas dimensions
+    canvas.width = 500
+    canvas.height = 400
+
+    // Colors
+    const colors = {
+      background: "#1e293b",
+      text: "#e2e8f0",
+      comment: "#94a3b8",
+      keyword: "#8b5cf6",
+      string: "#10b981",
+      function: "#3b82f6",
+      variable: "#f59e0b",
+      cursor: "#f8fafc",
+    }
+
+    // Code lines
+    const codeLines = [
+      { text: "// AI Engineer Portfolio", color: colors.comment },
+      { text: "import React from 'react';", color: colors.keyword },
+      { text: "import { motion } from 'framer-motion';", color: colors.keyword },
+      { text: "", color: colors.text },
+      { text: "function Portfolio() {", color: colors.function },
+      { text: "  const [projects, setProjects] = useState([]);", color: colors.variable },
+      { text: "", color: colors.text },
+      { text: "  useEffect(() => {", color: colors.function },
+      { text: "    // Fetch projects data", color: colors.comment },
+      { text: "    fetchProjects().then(data => {", color: colors.function },
+      { text: "      setProjects(data);", color: colors.variable },
+      { text: "    });", color: colors.text },
+      { text: "  }, []);", color: colors.text },
+      { text: "", color: colors.text },
+      { text: "  return (", color: colors.keyword },
+      { text: '    <div className="portfolio">', color: colors.text },
+      { text: '      <Header title="Sai Pranay Tadakamalla" />', color: colors.function },
+      { text: "      <Hero />", color: colors.function },
+      { text: "      <Projects data={projects} />", color: colors.function },
+      { text: "      <Contact />", color: colors.function },
+      { text: "    </div>", color: colors.text },
+      { text: "  );", color: colors.text },
+      { text: "}", color: colors.function },
+      { text: "", color: colors.text },
+      { text: "export default Portfolio;", color: colors.keyword },
+    ]
+
+    // Animation variables
+    let currentLine = 0
+    let currentChar = 0
+    let cursorVisible = true
+    let cursorBlinkInterval: number | null = null
+    let typingInterval: number | null = null
+
+    // Draw code editor
+    const drawEditor = () => {
+      // Clear canvas
+      ctx.fillStyle = colors.background
+      ctx.fillRect(0, 0, canvas.width, canvas.height)
+
+      // Draw line numbers and code
+      const lineHeight = 16
+      const startX = 40
+      const startY = 30
+      const tabSize = 20
+
+      // Draw line numbers background
+      ctx.fillStyle = "#0f172a"
+      ctx.fillRect(0, 0, startX - 10, canvas.height)
+
+      // Draw code lines
+      for (let i = 0; i < Math.min(currentLine + 1, codeLines.length); i++) {
+        // Draw line number
+        ctx.fillStyle = "#64748b"
+        ctx.font = "12px monospace"
+        ctx.textAlign = "right"
+        ctx.fillText(`${i + 1}`, startX - 15, startY + i * lineHeight)
+
+        // Draw code text
+        if (i < currentLine && i < codeLines.length) {
+          // Completed lines
+          ctx.fillStyle = codeLines[i].color
+          ctx.font = "12px monospace"
+          ctx.textAlign = "left"
+
+          // Handle indentation
+          let indentLevel = 0
+          if (codeLines[i].text.startsWith("  ")) {
+            indentLevel = Math.floor(codeLines[i].text.match(/^\s+/)?.[0].length || 0) / 2
+          }
+
+          ctx.fillText(codeLines[i].text, startX + indentLevel * tabSize, startY + i * lineHeight)
+        } else if (i === currentLine && i < codeLines.length) {
+          // Current line (typing)
+          const currentText = codeLines[i].text.substring(0, currentChar)
+          ctx.fillStyle = codeLines[i].color
+          ctx.font = "12px monospace"
+          ctx.textAlign = "left"
+
+          // Handle indentation
+          let indentLevel = 0
+          if (codeLines[i].text.startsWith("  ")) {
+            indentLevel = Math.floor(codeLines[i].text.match(/^\s+/)?.[0].length || 0) / 2
+          }
+
+          ctx.fillText(currentText, startX + indentLevel * tabSize, startY + i * lineHeight)
+
+          // Draw cursor
+          if (cursorVisible) {
+            const cursorX = startX + indentLevel * tabSize + ctx.measureText(currentText).width
+            ctx.fillStyle = colors.cursor
+            ctx.fillRect(cursorX, startY + i * lineHeight - lineHeight + 3, 2, lineHeight)
+          }
+        }
+      }
+    }
+
+    // Start typing animation
+    const startTyping = () => {
+      // Clear any existing intervals
+      if (typingInterval) clearInterval(typingInterval)
+      if (cursorBlinkInterval) clearInterval(cursorBlinkInterval)
+
+      // Start cursor blinking
+      cursorBlinkInterval = window.setInterval(() => {
+        cursorVisible = !cursorVisible
+        drawEditor()
+      }, 500)
+
+      // Start typing
+      typingInterval = window.setInterval(() => {
+        if (currentLine < codeLines.length) {
+          if (currentChar < codeLines[currentLine].text.length) {
+            currentChar++
+          } else {
+            currentLine++
+            currentChar = 0
+            // Small pause between lines
+            clearInterval(typingInterval)
+            setTimeout(() => {
+              startTyping()
+            }, 200)
+            return
+          }
+          drawEditor()
+        } else {
+          // Typing complete, restart after a pause
+          clearInterval(typingInterval)
+          setTimeout(() => {
+            currentLine = 0
+            currentChar = 0
+            startTyping()
+          }, 3000)
+        }
+      }, 50)
+    }
+
+    // Initial draw
+    drawEditor()
+    startTyping()
+
+    // Cleanup
+    return () => {
+      if (typingInterval) clearInterval(typingInterval)
+      if (cursorBlinkInterval) clearInterval(cursorBlinkInterval)
+    }
+  }, [])
+
+  return (
+    <div className="relative">
+      <div className="absolute top-0 left-0 right-0 h-8 bg-slate-800 rounded-t-lg flex items-center px-4">
+        <div className="flex space-x-2">
+          <div className="w-3 h-3 rounded-full bg-red-500"></div>
+          <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
+          <div className="w-3 h-3 rounded-full bg-green-500"></div>
+        </div>
+        <div className="text-xs text-slate-400 mx-auto">portfolio.tsx</div>
+      </div>
+      <canvas
+        ref={canvasRef}
+        className="rounded-lg shadow-2xl border border-slate-700"
+        style={{ borderTopLeftRadius: 0, borderTopRightRadius: 0 }}
+      />
+    </div>
+  )
+}
+
+export default function Hero() {
+  return (
+    <section
+      id="hero"
+      className="min-h-screen flex flex-col items-center justify-center relative overflow-hidden bg-slate-950 pt-20"
+    >
+      {/* Background elements */}
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-indigo-900/20 via-slate-900 to-slate-950 z-0"></div>
+
+      {/* Grid pattern */}
+      <div className="absolute inset-0 opacity-10">
+        <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+              <path d="M 40 0 L 0 0 0 40" fill="none" stroke="currentColor" strokeWidth="0.5" />
+            </pattern>
+          </defs>
+          <rect width="100%" height="100%" fill="url(#grid)" />
+        </svg>
+      </div>
+
+      <div className="container mx-auto px-6 relative z-10 flex flex-col lg:flex-row items-center">
+        {/* Text content */}
+        <motion.div
+          className="lg:w-1/2 text-center lg:text-left mb-12 lg:mb-0"
+          initial={{ opacity: 0, x: -50 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.8 }}
+        >
+          <motion.p
+            className="text-sm md:text-base uppercase tracking-widest text-indigo-400 mb-4 font-mono"
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2 }}
+          >
+            Hello, World!
+          </motion.p>
+
+          <h1 className="text-5xl md:text-6xl font-bold mb-6 font-display">
+            <span className="text-white">I'm <motion.p
+                        className="text-sm md:text-base uppercase tracking-widest text-indigo-400 mb-4 font-mono"
+                                    initial={{ opacity: 0, y: -20 }}
+                                                animate={{ opacity: 1, y: 0 }}
+                                                            transition={{ delay: 0.2 }}
+                                                                      >
+                                                                                 Sai Pranay Tadakamalla
+                                                                                            </motion.p></span>
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-blue-400">
+              <TypingAnimation text="Sai Pranay Tadakamalla" />
+            </span>
+          </h1>
+
+          <motion.div
+            className="flex flex-wrap justify-center lg:justify-start gap-3 mb-8"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.4 }}
+          >
+            <span className="px-4 py-2 bg-slate-800/80 backdrop-blur-sm rounded-full text-indigo-300 border border-indigo-500/20">
+              AI Engineer
+            </span>
+            <span className="px-4 py-2 bg-slate-800/80 backdrop-blur-sm rounded-full text-blue-300 border border-blue-500/20">
+              Web Developer
+            </span>
+            <span className="px-4 py-2 bg-slate-800/80 backdrop-blur-sm rounded-full text-violet-300 border border-violet-500/20">
+              Project Manager
+            </span>
+          </motion.div>
+
+          <motion.p
+            className="text-lg md:text-xl text-slate-300 mb-10 max-w-2xl mx-auto lg:mx-0"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.6 }}
+          >
+            Building next-generation applications with AI, ML, and MERN. Transforming ideas into innovative digital
+            experiences through code and creativity.
+          </motion.p>
+
+          <motion.div
+            className="flex flex-wrap justify-center lg:justify-start gap-4 mb-10"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.8 }}
+          >
+            <a
+              href="https://www.linkedin.com/in/sai-pranay-tadakamalla-7570bb1a6/"
+              className="p-3 rounded-full bg-slate-800/80 backdrop-blur-sm border border-slate-700 hover:bg-indigo-600 hover:border-indigo-500 transition-all duration-300"
+              aria-label="LinkedIn Profile"
+            >
+              <Linkedin className="w-6 h-6" />
+            </a>
+            <a
+              href="mailto:pranaytadakamalla@gmail.com"
+              className="p-3 rounded-full bg-slate-800/80 backdrop-blur-sm border border-slate-700 hover:bg-indigo-600 hover:border-indigo-500 transition-all duration-300"
+              aria-label="Email Contact"
+            >
+              <Mail className="w-6 h-6" />
+            </a>
+            <a
+              href="https://github.com/PranayTadakamalla/"
+              className="p-3 rounded-full bg-slate-800/80 backdrop-blur-sm border border-slate-700 hover:bg-indigo-600 hover:border-indigo-500 transition-all duration-300"
+              aria-label="GitHub Profile"
+            >
+              <GitHub className="w-6 h-6" />
+            </a>
+            <a
+              href="https://www.cloudskillsboost.google/public_profiles/5843f2b1-b8a3-47c4-a161-cb4c3a58f712"
+              className="p-3 rounded-full bg-slate-800/80 backdrop-blur-sm border border-slate-700 hover:bg-indigo-600 hover:border-indigo-500 transition-all duration-300"
+              aria-label="Google Cloud Skills Boost"
+            >
+              <Cloud className="w-6 h-6" />
+            </a>
+          </motion.div>
+
+          <motion.div
+            className="flex flex-col sm:flex-row justify-center lg:justify-start gap-4"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 1 }}
+          >
+            <a
+              href="https://drive.google.com/file/d/1YWAF3xAKdwQ-z4VdJp4nUTsH8UJTSz2m/view?usp=sharing"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-8 py-3 bg-indigo-600 hover:bg-indigo-700 text-white rounded-full transition-all duration-300 flex items-center justify-center gap-2"
+            >
+              <span>Download Resume</span>
+              <motion.span animate={{ x: [0, 5, 0] }} transition={{ repeat: Number.POSITIVE_INFINITY, duration: 1.5 }}>
+                →
+              </motion.span>
+            </a>
+            <button
+              onClick={() => smoothScrollTo("about")}
+              className="px-8 py-3 border border-indigo-500 text-indigo-300 hover:bg-indigo-600/20 rounded-full transition-all duration-300 flex items-center justify-center gap-2"
+            >
+              <span>Explore My Work</span>
+              <motion.span animate={{ y: [0, 5, 0] }} transition={{ repeat: Number.POSITIVE_INFINITY, duration: 1.5 }}>
+                ↓
+              </motion.span>
+            </button>
+          </motion.div>
+        </motion.div>
+
+        {/* Coding Animation */}
+        <motion.div
+          className="lg:w-1/2"
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.8, delay: 0.5 }}
+        >
+          <CodingAnimation />
+        </motion.div>
+      </div>
+    </section>
+  )
+}
