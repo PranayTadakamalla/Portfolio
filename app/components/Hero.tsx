@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useRef } from "react"
+import { useEffect, useRef, useState } from "react"
 import { motion } from "framer-motion"
 import { GitlabIcon as GitHub, Linkedin, Mail, Cloud } from "lucide-react"
 import { smoothScrollTo } from "@/utils/smoothScroll"
@@ -28,9 +28,10 @@ const TypingAnimation = ({ text }: { text: string }) => {
   )
 }
 
-// Coding animation component
+// Simplified coding animation component
 const CodingAnimation = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null)
+  const [isAnimating, setIsAnimating] = useState(true)
 
   useEffect(() => {
     const canvas = canvasRef.current
@@ -88,8 +89,8 @@ const CodingAnimation = () => {
     let currentLine = 0
     let currentChar = 0
     let cursorVisible = true
-    let cursorBlinkInterval: number | null = null
-    let typingInterval: number | null = null
+    let lastTime = 0
+    let cursorBlinkTime = 0
 
     // Draw code editor
     const drawEditor = () => {
@@ -154,56 +155,50 @@ const CodingAnimation = () => {
       }
     }
 
-    // Start typing animation
-    const startTyping = () => {
-      // Clear any existing intervals
-      if (typingInterval) clearInterval(typingInterval)
-      if (cursorBlinkInterval) clearInterval(cursorBlinkInterval)
+    // Animation loop using requestAnimationFrame instead of setInterval
+    const animate = (time: number) => {
+      if (!isAnimating) return
 
-      // Start cursor blinking
-      cursorBlinkInterval = window.setInterval(() => {
+      // Calculate delta time
+      const deltaTime = time - lastTime
+      lastTime = time
+
+      // Handle cursor blinking
+      cursorBlinkTime += deltaTime
+      if (cursorBlinkTime > 500) {
         cursorVisible = !cursorVisible
-        drawEditor()
-      }, 500)
+        cursorBlinkTime = 0
+      }
 
-      // Start typing
-      typingInterval = window.setInterval(() => {
+      // Handle typing (every 50ms)
+      if (deltaTime > 50) {
         if (currentLine < codeLines.length) {
           if (currentChar < codeLines[currentLine].text.length) {
             currentChar++
           } else {
             currentLine++
             currentChar = 0
-            // Small pause between lines
-            clearInterval(typingInterval)
-            setTimeout(() => {
-              startTyping()
-            }, 200)
-            return
           }
-          drawEditor()
         } else {
-          // Typing complete, restart after a pause
-          clearInterval(typingInterval)
-          setTimeout(() => {
-            currentLine = 0
-            currentChar = 0
-            startTyping()
-          }, 3000)
+          // Reset animation
+          currentLine = 0
+          currentChar = 0
         }
-      }, 50)
+      }
+
+      drawEditor()
+      requestAnimationFrame(animate)
     }
 
-    // Initial draw
+    // Start animation
     drawEditor()
-    startTyping()
+    requestAnimationFrame(animate)
 
     // Cleanup
     return () => {
-      if (typingInterval) clearInterval(typingInterval)
-      if (cursorBlinkInterval) clearInterval(cursorBlinkInterval)
+      setIsAnimating(false)
     }
-  }, [])
+  }, [isAnimating])
 
   return (
     <div className="relative">
@@ -263,14 +258,7 @@ export default function Hero() {
           </motion.p>
 
           <h1 className="text-5xl md:text-6xl font-bold mb-6 font-display">
-            <span className="text-white">I'm <motion.p
-                        className="text-sm md:text-base uppercase tracking-widest text-indigo-400 mb-4 font-mono"
-                                    initial={{ opacity: 0, y: -20 }}
-                                                animate={{ opacity: 1, y: 0 }}
-                                                            transition={{ delay: 0.2 }}
-                                                                      >
-                                                                                 Sai Pranay Tadakamalla
-                                                                                            </motion.p></span>
+            <span className="text-white">I'm </span>
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-blue-400">
               <TypingAnimation text="Sai Pranay Tadakamalla" />
             </span>
