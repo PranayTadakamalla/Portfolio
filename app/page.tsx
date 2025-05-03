@@ -11,6 +11,7 @@ import Navigation from "./components/Navigation"
 import ThreeScene from "./components/ThreeScene"
 import RobotAnimation from "./components/RobotAnimation"
 
+
 export default function Home() {
   return (
     <main className="bg-gray-50 dark:bg-gray-900 min-h-screen">
@@ -25,7 +26,7 @@ export default function Home() {
       <Projects />
       <Languages />
       <Contact />
-      <RobotAnimation />
+      <RobotAnimation/>
     </main>
   )
 }
