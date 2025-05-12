@@ -16,8 +16,9 @@ export default function Navigation() {
     { id: "about", label: "About", icon: <User className="w-5 h-5" /> },
     { id: "experience", label: "Experience", icon: <Briefcase className="w-5 h-5" /> },
     { id: "skills", label: "Skills", icon: <Code className="w-5 h-5" /> },
-    { id: "projects", label: "Projects", icon: <Cpu className="w-5 h-5" /> },
     { id: "education", label: "Education", icon: <GraduationCap className="w-5 h-5" /> },
+    { id: "projects", label: "Projects", icon: <Cpu className="w-5 h-5" /> },
+    { id: "languages", label: "Languages", icon: <Code className="w-5 h-5 rotate-90" /> },
     { id: "contact", label: "Contact", icon: <MessageSquare className="w-5 h-5" /> },
   ]
 
@@ -28,25 +29,38 @@ export default function Navigation() {
 
       // Determine active section based on scroll position
       const sections = navItems.map((item) => item.id)
-      for (const section of sections) {
+
+      // Find the section that is currently in view
+      let currentSection = activeSection
+
+      for (let i = sections.length - 1; i >= 0; i--) {
+        const section = sections[i]
         const element = document.getElementById(section)
+
         if (element) {
           const rect = element.getBoundingClientRect()
-          if (rect.top <= 100 && rect.bottom >= 100) {
-            setActiveSection(section)
+          // Consider a section in view if its top is within the top half of the viewport
+          if (rect.top <= window.innerHeight / 2) {
+            currentSection = section
             break
           }
         }
       }
+
+      setActiveSection(currentSection)
     }
 
     window.addEventListener("scroll", handleScroll)
+    // Initial check
+    handleScroll()
+
     return () => window.removeEventListener("scroll", handleScroll)
   }, [navItems])
 
   const handleNavClick = (id: string) => {
     smoothScrollTo(id)
     setIsOpen(false)
+    setActiveSection(id)
   }
 
   return (
@@ -69,7 +83,7 @@ export default function Navigation() {
             transition={{ delay: 0.2 }}
           >
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-blue-400">
-              Sai Pranay
+              The Baskerville Blueprint
             </span>
           </motion.div>
 

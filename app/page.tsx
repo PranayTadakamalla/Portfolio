@@ -7,15 +7,11 @@ import Education from "./components/Education"
 import Contact from "./components/Contact"
 import Projects from "./components/Projects"
 import Languages from "./components/Languages"
-import Navigation from "./components/Navigation"
 import ThreeScene from "./components/ThreeScene"
-import RobotAnimation from "./components/RobotAnimation"
-
 
 export default function Home() {
   return (
-    <main className="bg-gray-50 dark:bg-gray-900 min-h-screen">
-      <Navigation />
+    <main className="bg-slate-950 min-h-screen">
       <ThreeScene />
       <Hero />
       <About />
@@ -26,7 +22,6 @@ export default function Home() {
       <Projects />
       <Languages />
       <Contact />
-      <RobotAnimation/>
     </main>
   )
 }

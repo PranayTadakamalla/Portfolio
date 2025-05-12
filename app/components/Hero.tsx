@@ -5,13 +5,13 @@ import { motion } from "framer-motion"
 import { GitlabIcon as GitHub, Linkedin, Mail, Cloud } from "lucide-react"
 import { smoothScrollTo } from "@/utils/smoothScroll"
 
-// Typing animation component
-const TypingAnimation = ({ text }: { text: string }) => {
+// Enhanced typing animation component
+const TypingAnimation = ({ text, delay = 0 }: { text: string; delay?: number }) => {
   return (
     <motion.span
       initial={{ opacity: 1 }}
       animate={{ opacity: 1 }}
-      transition={{ duration: 0.8 }}
+      transition={{ duration: 0.8, delay }}
       className="inline-block"
     >
       {text.split("").map((char, index) => (
@@ -19,7 +19,7 @@ const TypingAnimation = ({ text }: { text: string }) => {
           key={index}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: index * 0.05, duration: 0.1 }}
+          transition={{ delay: delay + index * 0.05, duration: 0.1 }}
         >
           {char}
         </motion.span>
@@ -28,8 +28,8 @@ const TypingAnimation = ({ text }: { text: string }) => {
   )
 }
 
-// Simplified coding animation component
-const CodingAnimation = () => {
+// Improved code editor animation
+const CodeEditorAnimation = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const [isAnimating, setIsAnimating] = useState(true)
 
@@ -40,13 +40,32 @@ const CodingAnimation = () => {
     const ctx = canvas.getContext("2d")
     if (!ctx) return
 
-    // Set canvas dimensions
-    canvas.width = 500
-    canvas.height = 400
+    // Set canvas dimensions to match the container
+    const updateCanvasSize = () => {
+      const container = canvas.parentElement
+      if (container) {
+        // Set a fixed aspect ratio to ensure content fits
+        const width = Math.min(500, container.clientWidth)
+        const height = Math.min(400, width * 0.8)
+
+        canvas.width = width
+        canvas.height = height
+
+        // Update canvas style dimensions
+        canvas.style.width = `${width}px`
+        canvas.style.height = `${height}px`
+      }
+    }
+
+    // Initial size update
+    updateCanvasSize()
+
+    // Listen for resize events
+    window.addEventListener("resize", updateCanvasSize)
 
     // Colors
     const colors = {
-      background: "#1e293b",
+      background: "#0f172a", // Darker background
       text: "#e2e8f0",
       comment: "#94a3b8",
       keyword: "#8b5cf6",
@@ -56,7 +75,7 @@ const CodingAnimation = () => {
       cursor: "#f8fafc",
     }
 
-    // Code lines
+    // Code lines - shortened to ensure they fit
     const codeLines = [
       { text: "// AI Engineer Portfolio", color: colors.comment },
       { text: "import React from 'react';", color: colors.keyword },
@@ -74,7 +93,7 @@ const CodingAnimation = () => {
       { text: "", color: colors.text },
       { text: "  return (", color: colors.keyword },
       { text: '    <div className="portfolio">', color: colors.text },
-      { text: '      <Header title="Sai Pranay Tadakamalla" />', color: colors.function },
+      { text: '      <Header title="Sai Pranay" />', color: colors.function },
       { text: "      <Hero />", color: colors.function },
       { text: "      <Projects data={projects} />", color: colors.function },
       { text: "      <Contact />", color: colors.function },
@@ -94,33 +113,44 @@ const CodingAnimation = () => {
 
     // Draw code editor
     const drawEditor = () => {
+      if (!ctx) return
+
+      // Get current dimensions
+      const width = canvas.width
+      const height = canvas.height
+
+      // Scale factors based on canvas size
+      const scaleFactor = width / 500 // Base scale on a 500px reference width
+      const lineHeight = 16 * scaleFactor
+      const startX = 40 * scaleFactor
+      const startY = 30 * scaleFactor
+      const tabSize = 20 * scaleFactor
+      const fontSize = 12 * scaleFactor
+
       // Clear canvas
       ctx.fillStyle = colors.background
-      ctx.fillRect(0, 0, canvas.width, canvas.height)
-
-      // Draw line numbers and code
-      const lineHeight = 16
-      const startX = 40
-      const startY = 30
-      const tabSize = 20
+      ctx.fillRect(0, 0, width, height)
 
       // Draw line numbers background
-      ctx.fillStyle = "#0f172a"
-      ctx.fillRect(0, 0, startX - 10, canvas.height)
+      ctx.fillStyle = "#0a0f1c" // Even darker background for line numbers
+      ctx.fillRect(0, 0, startX - 10 * scaleFactor, height)
 
       // Draw code lines
       for (let i = 0; i < Math.min(currentLine + 1, codeLines.length); i++) {
+        // Safety check to prevent accessing beyond array bounds
+        if (i >= codeLines.length) continue
+
         // Draw line number
         ctx.fillStyle = "#64748b"
-        ctx.font = "12px monospace"
+        ctx.font = `${fontSize}px monospace`
         ctx.textAlign = "right"
-        ctx.fillText(`${i + 1}`, startX - 15, startY + i * lineHeight)
+        ctx.fillText(`${i + 1}`, startX - 15 * scaleFactor, startY + i * lineHeight)
 
         // Draw code text
         if (i < currentLine && i < codeLines.length) {
           // Completed lines
           ctx.fillStyle = codeLines[i].color
-          ctx.font = "12px monospace"
+          ctx.font = `${fontSize}px monospace`
           ctx.textAlign = "left"
 
           // Handle indentation
@@ -134,7 +164,7 @@ const CodingAnimation = () => {
           // Current line (typing)
           const currentText = codeLines[i].text.substring(0, currentChar)
           ctx.fillStyle = codeLines[i].color
-          ctx.font = "12px monospace"
+          ctx.font = `${fontSize}px monospace`
           ctx.textAlign = "left"
 
           // Handle indentation
@@ -149,7 +179,7 @@ const CodingAnimation = () => {
           if (cursorVisible) {
             const cursorX = startX + indentLevel * tabSize + ctx.measureText(currentText).width
             ctx.fillStyle = colors.cursor
-            ctx.fillRect(cursorX, startY + i * lineHeight - lineHeight + 3, 2, lineHeight)
+            ctx.fillRect(cursorX, startY + i * lineHeight - lineHeight + 3 * scaleFactor, 2 * scaleFactor, lineHeight)
           }
         }
       }
@@ -171,7 +201,7 @@ const CodingAnimation = () => {
       }
 
       // Handle typing (every 50ms)
-      if (deltaTime > 50) {
+      if (deltaTime > 10) {
         if (currentLine < codeLines.length) {
           if (currentChar < codeLines[currentLine].text.length) {
             currentChar++
@@ -197,11 +227,12 @@ const CodingAnimation = () => {
     // Cleanup
     return () => {
       setIsAnimating(false)
+      window.removeEventListener("resize", updateCanvasSize)
     }
   }, [isAnimating])
 
   return (
-    <div className="relative">
+    <div className="relative w-full max-w-[500px] mx-auto">
       <div className="absolute top-0 left-0 right-0 h-8 bg-slate-800 rounded-t-lg flex items-center px-4">
         <div className="flex space-x-2">
           <div className="w-3 h-3 rounded-full bg-red-500"></div>
@@ -212,7 +243,7 @@ const CodingAnimation = () => {
       </div>
       <canvas
         ref={canvasRef}
-        className="rounded-lg shadow-2xl border border-slate-700"
+        className="rounded-lg shadow-2xl border border-slate-700 w-full"
         style={{ borderTopLeftRadius: 0, borderTopRightRadius: 0 }}
       />
     </div>
@@ -257,10 +288,12 @@ export default function Hero() {
             Hello, World!
           </motion.p>
 
-          <h1 className="text-5xl md:text-6xl font-bold mb-6 font-display">
-            <span className="text-white">I'm </span>
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-blue-400">
-              <TypingAnimation text="Sai Pranay Tadakamalla" />
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 font-display">
+            <span className="text-white">
+              <TypingAnimation text="I'm Sai Pranay Tadakamalla"/>
+
+
+
             </span>
           </h1>
 
@@ -356,14 +389,14 @@ export default function Hero() {
           </motion.div>
         </motion.div>
 
-        {/* Coding Animation */}
+        {/* Code Editor Animation */}
         <motion.div
-          className="lg:w-1/2"
+          className="lg:w-1/2 w-full"
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8, delay: 0.5 }}
         >
-          <CodingAnimation />
+          <CodeEditorAnimation />
         </motion.div>
       </div>
     </section>
