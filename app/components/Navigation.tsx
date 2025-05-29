@@ -2,7 +2,20 @@
 
 import { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import { Menu, X, Home, User, Briefcase, Code, GraduationCap, MessageSquare, Cpu, ChevronUp } from "lucide-react"
+import {
+  Menu,
+  X,
+  Home,
+  User,
+  Briefcase,
+  Code,
+  GraduationCap,
+  MessageSquare,
+  Cpu,
+  ChevronUp,
+  BookOpen,
+  Award,
+} from "lucide-react"
 import { smoothScrollTo } from "@/utils/smoothScroll"
 
 export default function Navigation() {
@@ -17,6 +30,8 @@ export default function Navigation() {
     { id: "experience", label: "Experience", icon: <Briefcase className="w-5 h-5" /> },
     { id: "skills", label: "Skills", icon: <Code className="w-5 h-5" /> },
     { id: "education", label: "Education", icon: <GraduationCap className="w-5 h-5" /> },
+    { id: "research", label: "Research", icon: <BookOpen className="w-5 h-5" /> },
+    { id: "certifications", label: "Certifications", icon: <Award className="w-5 h-5" /> },
     { id: "projects", label: "Projects", icon: <Cpu className="w-5 h-5" /> },
     { id: "languages", label: "Languages", icon: <Code className="w-5 h-5 rotate-90" /> },
     { id: "contact", label: "Contact", icon: <MessageSquare className="w-5 h-5" /> },
@@ -88,7 +103,7 @@ export default function Navigation() {
           </motion.div>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:block">
+          <nav className="hidden lg:block">
             <ul className="flex items-center gap-1">
               {navItems.map((item) => (
                 <motion.li key={item.id} whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }}>
@@ -110,7 +125,7 @@ export default function Navigation() {
 
           {/* Mobile Navigation Toggle */}
           <motion.button
-            className="md:hidden bg-slate-800/80 backdrop-blur-md p-3 rounded-full shadow-lg"
+            className="lg:hidden bg-slate-800/80 backdrop-blur-md p-3 rounded-full shadow-lg"
             onClick={() => setIsOpen(!isOpen)}
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
@@ -124,7 +139,7 @@ export default function Navigation() {
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            className="fixed inset-0 z-40 bg-slate-900/95 backdrop-blur-md md:hidden pt-20"
+            className="fixed inset-0 z-40 bg-slate-900/95 backdrop-blur-md lg:hidden pt-20"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}

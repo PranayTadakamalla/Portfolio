@@ -11,6 +11,7 @@ module.exports = {
     extend: {
       fontFamily: {
         display: ["var(--font-display)", "sans-serif"],
+        sans: ["var(--font-inter)", "sans-serif"],
       },
       colors: {
         border: "hsl(var(--border))",
@@ -91,6 +92,9 @@ module.exports = {
     "text-blue-500",
     "text-green-500",
     "text-pink-500",
+    "text-indigo-400",
+    "text-blue-400",
+    "text-violet-400",
     "from-cyan-500",
     "from-purple-500",
     "from-blue-500",

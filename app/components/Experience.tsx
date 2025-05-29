@@ -1,16 +1,17 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { Briefcase, Calendar, MapPin, Zap } from "lucide-react"
+import { Briefcase, Calendar, MapPin, Zap, Users, Crown } from "lucide-react"
 import SectionHeading from "./SectionHeading"
 
 export default function Experience() {
   const experiences = [
     {
-      period: "Feb 2025 - Present",
+      period: "Jan 2025 - Present",
       role: "Project Manager",
       company: "Pramila Foundation",
       color: "indigo",
+      type: "professional",
       projects: [
         {
           title: "🌐 Website Development & Maintenance",
@@ -34,6 +35,7 @@ export default function Experience() {
       role: "Web Developer",
       company: "Unifesto",
       color: "blue",
+      type: "professional",
       projects: [
         {
           title: "🌐 Event Management Website",
@@ -48,20 +50,50 @@ export default function Experience() {
       ],
     },
     {
-      period: "Oct 2024 - Nov 2024",
-      role: "Front-End Developer Intern",
-      company: "CodeAlpha",
+      period: "2024 - Present",
+      role: "Vice-President",
+      company: "Microsoft Learn Student Chapter, Malla Reddy University",
       color: "violet",
+      type: "leadership",
       projects: [
         {
-          title: "🎵 Music Player",
+          title: "🚀 Strategic Leadership & Vision",
           description:
-            "Developed an interactive web-based music player using HTML, CSS, and JavaScript, featuring custom audio controls and playlist functionality.",
+            "Leading strategic initiatives to foster a culture of continuous learning and innovation in cloud computing and AI technologies. Spearheading the chapter's digital transformation journey.",
         },
         {
-          title: "🖼️ Image Gallery",
+          title: "🎯 Community Building & Engagement",
           description:
-            "Created a dynamic and responsive image gallery with JavaScript, implementing features like image zoom, lightbox view, and filtering.",
+            "Orchestrating tech workshops, hackathons, and certification drives to empower students with cutting-edge Microsoft technologies. Building bridges between academia and industry.",
+        },
+        {
+          title: "🌟 Mentorship & Development",
+          description:
+            "Mentoring fellow students in Azure, AI/ML, and modern development practices. Creating pathways for students to achieve Microsoft certifications and industry readiness.",
+        },
+      ],
+    },
+    {
+      period: "2024 - Present",
+      role: "Member",
+      company: "Indian Knowledge Systems (IKS) Club, Malla Reddy University",
+      color: "teal",
+      type: "leadership",
+      projects: [
+        {
+          title: "🔬 Research & Innovation",
+          description:
+            "Contributing to research initiatives that bridge traditional Indian knowledge systems with modern technological applications, exploring AI-driven solutions for ancient wisdom preservation.",
+        },
+        {
+          title: "📚 Knowledge Preservation",
+          description:
+            "Participating in digitization projects to preserve and modernize traditional Indian knowledge systems using contemporary technology frameworks and methodologies.",
+        },
+        {
+          title: "🤝 Collaborative Learning",
+          description:
+            "Engaging in interdisciplinary collaborations to explore the intersection of traditional knowledge and emerging technologies like machine learning and data science.",
         },
       ],
     },
@@ -73,7 +105,7 @@ export default function Experience() {
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-blue-900/10 via-slate-900 to-slate-950 z-0"></div>
 
       <div className="container mx-auto px-6 relative z-10">
-        <SectionHeading title="Experience" />
+        <SectionHeading title="Experience & Leadership" />
 
         <div className="max-w-5xl mx-auto">
           {experiences.map((exp, index) => (
@@ -107,7 +139,11 @@ export default function Experience() {
                 {/* Timeline dot */}
                 <div className="relative">
                   <div className="w-16 h-16 rounded-full bg-slate-800 flex items-center justify-center z-10 relative border border-indigo-500/30">
-                    <Briefcase className={`w-8 h-8 text-${exp.color}-400`} />
+                    {exp.type === "leadership" ? (
+                      <Crown className={`w-8 h-8 text-${exp.color}-400`} />
+                    ) : (
+                      <Briefcase className={`w-8 h-8 text-${exp.color}-400`} />
+                    )}
                   </div>
                 </div>
 
@@ -115,7 +151,11 @@ export default function Experience() {
                 <div className="ml-8 bg-slate-900/80 backdrop-blur-md p-6 rounded-2xl border border-indigo-500/20 flex-1">
                   <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
                     <h3 className="text-2xl font-bold text-white flex items-center gap-2 font-display">
-                      <Zap className={`w-5 h-5 text-${exp.color}-400`} />
+                      {exp.type === "leadership" ? (
+                        <Users className={`w-5 h-5 text-${exp.color}-400`} />
+                      ) : (
+                        <Zap className={`w-5 h-5 text-${exp.color}-400`} />
+                      )}
                       {exp.role}
                     </h3>
                     <div className="flex items-center text-indigo-400 mt-2 md:mt-0">
@@ -127,6 +167,11 @@ export default function Experience() {
                   <div className="flex items-center mb-6">
                     <MapPin className="w-4 h-4 text-slate-400 mr-1" />
                     <span className="text-slate-300">{exp.company}</span>
+                    {exp.type === "leadership" && (
+                      <span className="ml-3 px-2 py-1 bg-violet-500/20 text-violet-300 text-xs rounded-full border border-violet-500/30">
+                        Leadership
+                      </span>
+                    )}
                   </div>
 
                   <div className="space-y-4">

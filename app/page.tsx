@@ -4,6 +4,7 @@ import Experience from "./components/Experience"
 import Skills from "./components/Skills"
 import Certifications from "./components/Certifications"
 import Education from "./components/Education"
+import Research from "./components/Research"
 import Contact from "./components/Contact"
 import Projects from "./components/Projects"
 import Languages from "./components/Languages"
@@ -18,6 +19,7 @@ export default function Home() {
       <Experience />
       <Skills />
       <Education />
+      <Research />
       <Certifications />
       <Projects />
       <Languages />
