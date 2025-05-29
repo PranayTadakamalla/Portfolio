@@ -290,10 +290,7 @@ export default function Hero() {
 
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 font-display">
             <span className="text-white">
-              <TypingAnimation text="I'm Sai Pranay Tadakamalla"/>
-
-
-
+              <TypingAnimation text="I'm Sai Pranay Tadakamalla" />
             </span>
           </h1>
 
@@ -367,7 +364,7 @@ export default function Hero() {
             transition={{ delay: 1 }}
           >
             <a
-              href="https://drive.google.com/file/d/1YWAF3xAKdwQ-z4VdJp4nUTsH8UJTSz2m/view?usp=sharing"
+              href="https://drive.google.com/file/d/1weV701FP9WkU_JXlv3HdGJl0QIJ3Zryq/view?usp=sharing"
               target="_blank"
               rel="noopener noreferrer"
               className="px-8 py-3 bg-indigo-600 hover:bg-indigo-700 text-white rounded-full transition-all duration-300 flex items-center justify-center gap-2"
