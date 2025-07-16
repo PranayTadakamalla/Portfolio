@@ -151,7 +151,7 @@ export default function Experience() {
                 <div className="ml-8 bg-slate-900/80 backdrop-blur-md p-6 rounded-2xl border border-indigo-500/20 flex-1">
                   <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
                     <h3 className="text-2xl font-bold text-white flex items-center gap-2 font-display">
-                      {exp.type === "leadership" ? (
+                      {exp.type === "leadership" ? "Member"(
                         <Users className={`w-5 h-5 text-${exp.color}-400`} />
                       ) : (
                         <Zap className={`w-5 h-5 text-${exp.color}-400`} />
