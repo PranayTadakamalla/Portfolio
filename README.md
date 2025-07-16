@@ -3,7 +3,7 @@
 Welcome to my personal portfolio website! This site showcases my work, skills, and projects.  
 
 ## 🚀 Live Demo  
-Check it out here: [(https://pranaytadakamalla.vercel.app/)](#)  
+Check it out here: [(https://pranaytadakamalla.me)](#)  
 
 ## 📌 Features  
 - Clean and modern design ✨  
