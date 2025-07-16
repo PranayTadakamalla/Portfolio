@@ -7,7 +7,7 @@ import SectionHeading from "./SectionHeading"
 export default function Experience() {
   const experiences = [
     {
-      period: "Jan 2025 - Present",
+      period: "Jan 2025 - Jun 2025",
       role: "Project Manager",
       company: "Pramila Foundation",
       color: "indigo",
@@ -31,7 +31,7 @@ export default function Experience() {
       ],
     },
     {
-      period: "Mar 2025 - Present",
+      period: "Mar 2025 - May 2025",
       role: "Web Developer",
       company: "Unifesto",
       color: "blue",
