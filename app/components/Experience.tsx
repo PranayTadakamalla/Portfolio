@@ -50,7 +50,7 @@ export default function Experience() {
       ],
     },
     {
-      period: "2024 - Present",
+      period: "2025 - Present",
       role: "Vice-President",
       company: "Microsoft Learn Student Chapter, Malla Reddy University",
       color: "violet",
@@ -78,7 +78,7 @@ export default function Experience() {
       role: "Member",
       company: "Indian Knowledge Systems (IKS) Club, Malla Reddy University",
       color: "teal",
-      type: "leadership",
+      type: "Member",
       projects: [
         {
           title: "🔬 Research & Innovation",
