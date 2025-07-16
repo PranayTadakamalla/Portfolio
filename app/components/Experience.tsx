@@ -77,7 +77,7 @@ export default function Experience() {
       period: "2024 - Present",
       role: "Member",
       company: "Indian Knowledge Systems (IKS) Club, Malla Reddy University",
-      color: "teal",
+      color: "red",
       type: "Member",
       projects: [
         {
@@ -167,7 +167,7 @@ export default function Experience() {
                   <div className="flex items-center mb-6">
                     <MapPin className="w-4 h-4 text-slate-400 mr-1" />
                     <span className="text-slate-300">{exp.company}</span>
-                    {exp.type === "leadership" && (
+                    {exp.type === "leadership" && "Member"(
                       <span className="ml-3 px-2 py-1 bg-violet-500/20 text-violet-300 text-xs rounded-full border border-violet-500/30">
                         Leadership
                       </span>
