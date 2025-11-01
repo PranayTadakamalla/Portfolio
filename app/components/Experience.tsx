@@ -31,25 +31,6 @@ export default function Experience() {
       ],
     },
     {
-      period: "Mar 2025 - May 2025",
-      role: "Web Developer",
-      company: "Unifesto",
-      color: "blue",
-      type: "professional",
-      projects: [
-        {
-          title: "🌐 Event Management Website",
-          description:
-            "Developed an event management platform for Unifesto, a student initiative startup. Responsible for designing the website, implementing key features like event registration, event schedule management, and user authentication.",
-        },
-        {
-          title: "🛠️ Website Maintenance & Updates",
-          description:
-            "Ongoing maintenance of the Unifesto website, ensuring timely updates, bug fixes, and implementing new features based on feedback from users and event organizers.",
-        },
-      ],
-    },
-    {
       period: "2025 - Present",
       role: "Vice-President",
       company: "Microsoft Learn Student Chapter, Malla Reddy University",
