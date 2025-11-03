@@ -56,7 +56,7 @@ export default function Experience() {
     },
     {
       period: "Aug 2024 - Oct 2025",
-      role: "Core Team Member",
+      role: "Member",
       company: "GDG On Campus, Malla Reddy University",
       color: "blue",
       type: "leadership",
