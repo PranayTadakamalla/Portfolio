@@ -31,7 +31,7 @@ export default function Experience() {
       ],
     },
     {
-      period: "2025 - Present",
+      period: "Apr 2025 - Oct 2025",
       role: "Vice-President",
       company: "Microsoft Learn Student Chapter, Malla Reddy University",
       color: "violet",
@@ -55,11 +55,35 @@ export default function Experience() {
       ],
     },
     {
-      period: "2024 - Present",
+      period: "Aug 2024 - Oct 2025",
+      role: "Core Team Member",
+      company: "GDG On Campus, Malla Reddy University",
+      color: "blue",
+      type: "leadership",
+      projects: [
+        {
+          title: "🌍 Community Growth & Event Organization",
+          description:
+            "Collaborating with Google Developer Groups to organize workshops, study jams, and tech talks that promote open-source development and Google technologies.",
+        },
+        {
+          title: "💡 Technical Workshops & Hackathons",
+          description:
+            "Coordinated and led hands-on sessions on technologies like Flutter, Firebase, and TensorFlow, enabling students to build real-world projects.",
+        },
+        {
+          title: "🤝 Collaboration & Networking",
+          description:
+            "Strengthening connections between developers, innovators, and startups to foster a thriving local tech ecosystem within the campus.",
+        },
+      ],
+    },
+    {
+      period: "Dec 2024 - Nov 2025",
       role: "Member",
       company: "Indian Knowledge Systems (IKS) Club, Malla Reddy University",
       color: "red",
-      type: "Member",
+      type: "member",
       projects: [
         {
           title: "🔬 Research & Innovation",
@@ -132,7 +156,7 @@ export default function Experience() {
                 <div className="ml-8 bg-slate-900/80 backdrop-blur-md p-6 rounded-2xl border border-indigo-500/20 flex-1">
                   <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
                     <h3 className="text-2xl font-bold text-white flex items-center gap-2 font-display">
-                      {exp.type === "leadership" ? "Member"(
+                      {exp.type === "leadership" ? (
                         <Users className={`w-5 h-5 text-${exp.color}-400`} />
                       ) : (
                         <Zap className={`w-5 h-5 text-${exp.color}-400`} />
@@ -148,7 +172,7 @@ export default function Experience() {
                   <div className="flex items-center mb-6">
                     <MapPin className="w-4 h-4 text-slate-400 mr-1" />
                     <span className="text-slate-300">{exp.company}</span>
-                    {exp.type === "leadership" && "Member"(
+                    {exp.type === "leadership" && (
                       <span className="ml-3 px-2 py-1 bg-violet-500/20 text-violet-300 text-xs rounded-full border border-violet-500/30">
                         Leadership
                       </span>
