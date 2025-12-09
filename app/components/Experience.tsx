@@ -5,109 +5,94 @@ import { Briefcase, Calendar, MapPin, Zap, Users, Crown } from "lucide-react"
 import SectionHeading from "./SectionHeading"
 
 export default function Experience() {
-  const experiences = [
-    {
-      period: "Jan 2025 - Jun 2025",
-      role: "Project Manager",
-      company: "Pramila Foundation",
-      color: "indigo",
-      type: "professional",
-      projects: [
-        {
-          title: "🌐 Website Development & Maintenance",
-          description:
-            "Oversaw the creation of the foundation's website, including design, functionality, and content updates. Continuously ensuring the website aligns with the foundation's goals and provides an accessible, user-friendly experience.",
-        },
-        {
-          title: "📱 Social Media Strategy & Management",
-          description:
-            "Developed and implemented social media strategies to increase engagement and visibility for Pramila Foundation. Managed content creation, scheduling, and performance analytics for platforms like Facebook, Instagram, and Twitter.",
-        },
-        {
-          title: "📋 Project Coordination & Team Management",
-          description:
-            "Responsible for overseeing and guiding the activities of the team. Assigned roles and ensured smooth communication across all projects, focusing on both short-term deliverables and long-term goals for the foundation.",
-        },
-      ],
-    },
-    {
-      period: "Apr 2025 - Oct 2025",
-      role: "Vice-President",
-      company: "Microsoft Learn Student Chapter, Malla Reddy University",
-      color: "violet",
-      type: "leadership",
-      projects: [
-        {
-          title: "🚀 Strategic Leadership & Vision",
-          description:
-            "Leading strategic initiatives to foster a culture of continuous learning and innovation in cloud computing and AI technologies. Spearheading the chapter's digital transformation journey.",
-        },
-        {
-          title: "🎯 Community Building & Engagement",
-          description:
-            "Orchestrating tech workshops, hackathons, and certification drives to empower students with cutting-edge Microsoft technologies. Building bridges between academia and industry.",
-        },
-        {
-          title: "🌟 Mentorship & Development",
-          description:
-            "Mentoring fellow students in Azure, AI/ML, and modern development practices. Creating pathways for students to achieve Microsoft certifications and industry readiness.",
-        },
-      ],
-    },
-    {
-      period: "Aug 2024 - Oct 2025",
-      role: "Member",
-      company: "GDG On Campus, Malla Reddy University",
-      color: "blue",
-      type: "leadership",
-      projects: [
-        {
-          title: "🌍 Community Growth & Event Organization",
-          description:
-            "Collaborating with Google Developer Groups to organize workshops, study jams, and tech talks that promote open-source development and Google technologies.",
-        },
-        {
-          title: "💡 Technical Workshops & Hackathons",
-          description:
-            "Coordinated and led hands-on sessions on technologies like Flutter, Firebase, and TensorFlow, enabling students to build real-world projects.",
-        },
-        {
-          title: "🤝 Collaboration & Networking",
-          description:
-            "Strengthening connections between developers, innovators, and startups to foster a thriving local tech ecosystem within the campus.",
-        },
-      ],
-    },
-    {
-      period: "Dec 2024 - Nov 2025",
-      role: "Member",
-      company: "Indian Knowledge Systems (IKS) Club, Malla Reddy University",
-      color: "red",
-      type: "member",
-      projects: [
-        {
-          title: "🔬 Research & Innovation",
-          description:
-            "Contributing to research initiatives that bridge traditional Indian knowledge systems with modern technological applications, exploring AI-driven solutions for ancient wisdom preservation.",
-        },
-        {
-          title: "📚 Knowledge Preservation",
-          description:
-            "Participating in digitization projects to preserve and modernize traditional Indian knowledge systems using contemporary technology frameworks and methodologies.",
-        },
-        {
-          title: "🤝 Collaborative Learning",
-          description:
-            "Engaging in interdisciplinary collaborations to explore the intersection of traditional knowledge and emerging technologies like machine learning and data science.",
-        },
-      ],
-    },
-  ]
+const experiences = [
+  {
+    period: "Jul 2024 – Jul 2025",
+    role: "Full-Stack Development Intern",
+    company: "Edureka | Veranda Enterprise",
+    color: "blue",
+    type: "internship",
+    projects: [
+      {
+        title: "Full-Stack Application Development",
+        description:
+          "Developed full-stack applications using React, Node.js, Express.js, MongoDB, and MySQL, building responsive UIs and scalable backend APIs.",
+      },
+      {
+        title: "Technology Stack Mastery",
+        description:
+          "Gained hands-on experience across the complete MERN stack with focus on frontend development (React, responsive design) and backend architecture (Node.js, Express.js, RESTful APIs).",
+      },
+      {
+        title: "Database Management",
+        description:
+          "Worked with both NoSQL (MongoDB) and relational (MySQL) databases, implementing efficient data models and optimization strategies for scalable applications.",
+      },
+    ],
+  },
+  {
+    period: "Current",
+    role: "President",
+    company: "Alan Turing Club",
+    color: "violet",
+    type: "leadership",
+    projects: [
+      {
+        title: "Technical Leadership",
+        description:
+          "Led technical initiatives, organized workshops, and mentored students in software development and AI/ML activities.",
+      },
+      {
+        title: "Community Building",
+        description:
+          "Fostered a vibrant community of developers and enthusiasts, providing guidance and support for learning and growth.",
+      },
+    ],
+  },
+  {
+    period: "Current",
+    role: "Board Member",
+    company: "CSI (Computer Society of India), MRUH",
+    color: "green",
+    type: "leadership",
+    projects: [
+      {
+        title: "Technical Event Planning",
+        description:
+          "Contributed to technical event planning, student coordination, and community-driven learning programs.",
+      },
+      {
+        title: "Community Engagement",
+        description:
+          "Supported initiatives that promote computer science knowledge and professional development within the institution.",
+      },
+    ],
+  },
+  {
+    period: "Current",
+    role: "Board Member",
+    company: "IE Cell (Innovation & Entrepreneurship Cell), MRUH",
+    color: "orange",
+    type: "leadership",
+    projects: [
+      {
+        title: "Innovation Initiatives",
+        description:
+          "Supported innovation-focused events, project mentoring, and student engagement initiatives.",
+      },
+      {
+        title: "Entrepreneurship Support",
+        description:
+          "Facilitated the development of innovative ideas and supported students in turning concepts into viable projects.",
+      },
+    ],
+  },
+];
 
   return (
     <section id="experience" className="py-20 relative overflow-hidden bg-slate-950">
       {/* Background elements */}
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-blue-900/10 via-slate-900 to-slate-950 z-0"></div>
+      <div className="absolute inset-0 bg-black z-0"></div>
 
       <div className="container mx-auto px-6 relative z-10">
         <SectionHeading title="Experience & Leadership" />

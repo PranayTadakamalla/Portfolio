@@ -80,7 +80,7 @@ export default function About() {
   return (
     <section id="about" className="py-20 relative overflow-hidden bg-slate-950">
       {/* Background elements */}
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-indigo-900/10 via-slate-900 to-slate-950 z-0"></div>
+      <div className="absolute inset-0 bg-black z-0"></div>
       <ParticleField />
 
       <div className="container mx-auto px-6 relative z-10">

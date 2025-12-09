@@ -26,11 +26,9 @@ export default function Navigation() {
 
   const navItems = [
     { id: "hero", label: "Home", icon: <Home className="w-5 h-5" /> },
-    { id: "about", label: "About", icon: <User className="w-5 h-5" /> },
     { id: "experience", label: "Experience", icon: <Briefcase className="w-5 h-5" /> },
-    { id: "skills", label: "Skills", icon: <Code className="w-5 h-5" /> },
     { id: "education", label: "Education", icon: <GraduationCap className="w-5 h-5" /> },
-    { id: "research", label: "Research", icon: <BookOpen className="w-5 h-5" /> },
+    { id: "skills", label: "Skills", icon: <Code className="w-5 h-5" /> },
     { id: "certifications", label: "Certifications", icon: <Award className="w-5 h-5" /> },
     { id: "projects", label: "Projects", icon: <Cpu className="w-5 h-5" /> },
     { id: "languages", label: "Languages", icon: <Code className="w-5 h-5 rotate-90" /> },

@@ -54,7 +54,7 @@ export default function Contact() {
   return (
     <section id="contact" className="py-20 relative overflow-hidden bg-slate-950">
       {/* Background elements */}
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-indigo-900/10 via-slate-900 to-slate-950 z-0"></div>
+      <div className="absolute inset-0 bg-black z-0"></div>
 
       <div className="container mx-auto px-6 relative z-10">
         <SectionHeading title="Let's Connect" />
@@ -63,8 +63,8 @@ export default function Contact() {
           <ContactCard
             icon={Mail}
             title="Email"
-            content="pranaytadakamalla@gmail.com"
-            link="mailto:pranaytadakamalla@gmail.com"
+            content="vishnuvardhanyeduresi@gmail.com"
+            link="mailto:vishnuvardhanyeduresi@gmail.com"
             delay={0.1}
             color="indigo"
           />
@@ -72,8 +72,8 @@ export default function Contact() {
           <ContactCard
             icon={Phone}
             title="Phone"
-            content="+91 - 86881 83168"
-            link="tel:+918688183168"
+            content="+91 91217 27572"
+            link="tel:+919121727572"
             delay={0.2}
             color="blue"
           />
