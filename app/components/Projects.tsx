@@ -65,46 +65,90 @@ export default function Projects() {
 
   const categories = [
     { id: "AI", label: "AI & ML", icon: <Cpu className="w-4 h-4" /> },
-    { id: "Web", label: "Full-Stack", icon: <Globe className="w-4 h-4" /> },
+    { id: "Web", label: "Web Apps", icon: <Globe className="w-4 h-4" /> },
+    { id: "Tools", label: "Tools", icon: <Braces className="w-4 h-4" /> },
   ]
 
   const projects = [
     {
-      title: "Social Media Recommendation System",
-      description: "ML-driven recommendation engine that increased content relevancy by 28% and boosted predicted user engagement by ~20%, using similarity modeling and behavioral analytics.",
-      techStack: "Machine Learning, Python, Behavioral Analytics",
-      link: "#",
+      title: "ElanAI",
+      description: "Advanced conversational AI assistant with natural language processing capabilities",
+      techStack: "ReactJS, Python",
+      link: "https://github.com/PranayTadakamalla/ElanAI",
       icon: <Bot className="w-6 h-6 text-indigo-400" />,
       type: "github",
       category: "AI",
       featured: true,
     },
     {
-      title: "MEDI-CARE – Healthcare Management System",
-      description: "Python-based healthcare platform that automated 70% of patient-data processing and reduced record handling time by ~40%, improving workflow efficiency.",
-      techStack: "Python, Database Management, Healthcare Systems",
-      link: "#",
+      title: "Cyber Chat Bot",
+      description: "Interactive chatbot platform with advanced conversation capabilities",
+      techStack: "MERN Stack - MongoDB, Express.js, React.js, Node.js",
+      link: "https://cyberchat-g4ii.onrender.com/",
+      icon: <MessageSquare className="w-6 h-6 text-blue-400" />,
+      type: "live",
+      category: "AI",
+    },
+    {
+      title: "Health Assistant",
+      description: "AI-powered health consultation and recommendation system",
+      techStack: "ReactJS, CSS",
+      link: "https://healthassistant-pranaytadakamallas-projects.vercel.app/",
       icon: <Flask className="w-6 h-6 text-green-400" />,
-      type: "github",
+      type: "live",
       category: "AI",
-      featured: true,
     },
     {
-      title: "Fire Safety Detection (NLP)",
-      description: "NLP-based fire-hazard detection model achieving 86% accuracy, enabling early risk identification through text-pattern analysis and automated hazard flagging.",
-      techStack: "NLP, Python, Machine Learning, Text Analysis",
-      link: "#",
-      icon: <Cpu className="w-6 h-6 text-red-400" />,
-      type: "github",
-      category: "AI",
-      featured: true,
+      title: "Text-to-Speech",
+      description: "Convert text to natural-sounding speech with customizable voices",
+      techStack: "ReactJS, JavaScript",
+      link: "https://pranaytexttospeech.vercel.app/",
+      icon: <Headphones className="w-6 h-6 text-violet-400" />,
+      type: "live",
+      category: "Web",
     },
     {
-      title: "Full-Stack Development Projects",
-      description: "Developed multiple full-stack applications using React, Node.js, Express.js, MongoDB, and MySQL, building responsive UIs and scalable backend APIs during industry internship.",
-      techStack: "React, Node.js, Express.js, MongoDB, MySQL, Full-Stack",
-      link: "#",
-      icon: <Globe className="w-6 h-6 text-blue-400" />,
+      title: "Verses In Motion",
+      description: "Interactive scripture visualization and exploration platform",
+      techStack: "React.js, Tailwind CSS",
+      link: "https://verses-in-motion.vercel.app/",
+      icon: <Globe className="w-6 h-6 text-indigo-400" />,
+      type: "live",
+      category: "Web",
+    },
+    {
+      title: "Mnemoflip",
+      description: "Memory enhancement game with flashcard-based learning",
+      techStack: "Next.js, Tailwind CSS",
+      link: "https://v0-mnemoflip.vercel.app/",
+      icon: <Calculator className="w-6 h-6 text-orange-400" />,
+      type: "live",
+      category: "Web",
+    },
+    {
+      title: "Feast-Find",
+      description: "Restaurant discovery and food recommendation platform",
+      techStack: "MERN Stack - MongoDB, Express.js, React.js, Node.js",
+      link: "https://github.com/PranayTadakamalla/Feast-Find",
+      icon: <Utensils className="w-6 h-6 text-red-400" />,
+      type: "github",
+      category: "Web",
+    },
+    {
+      title: "SimpleSciTools",
+      description: "Scientific calculation and visualization toolkit",
+      techStack: "Python",
+      link: "https://github.com/PranayTadakamalla/SimpleSciTools",
+      icon: <Flask className="w-6 h-6 text-teal-400" />,
+      type: "github",
+      category: "Tools",
+    },
+    {
+      title: "Tic-Tac-Toe Game",
+      description: "Classic two-player game with AI opponent options",
+      techStack: "Python, Django",
+      link: "https://github.com/PranayTadakamalla/Tic-Tac-Toe",
+      icon: <TicTacToe className="w-6 h-6 text-teal-400" />,
       type: "github",
       category: "Web",
     },
@@ -115,7 +159,7 @@ export default function Projects() {
   return (
     <section id="projects" className="py-20 relative overflow-hidden bg-slate-950">
       {/* Background elements */}
-      <div className="absolute inset-0 bg-black z-0"></div>
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-violet-900/10 via-slate-900 to-slate-950 z-0"></div>
 
       {/* Grid Pattern */}
       <div className="absolute inset-0 opacity-5">
@@ -132,7 +176,7 @@ export default function Projects() {
       <div className="container mx-auto px-6 relative z-10">
         <SectionHeading
           title="Projects"
-          subtitle="AI/ML solutions and full-stack applications showcasing technical expertise"
+          subtitle="Explore my portfolio of web applications, AI solutions, and development tools"
         />
 
         {/* Category filters */}

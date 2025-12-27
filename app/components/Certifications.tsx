@@ -86,9 +86,34 @@ const FloatingParticles = () => {
 export default function Certifications() {
   const certifications = [
     {
-      title: "Full Stack Development Internship Program",
-      issuer: "Edureka",
-      year: 2025,
+      title: "Career Essentials in Generative AI",
+      issuer: "Microsoft & LinkedIn",
+      year: 2024,
+    },
+    {
+      title: "Elements of AI: Introduction to AI",
+      issuer: "University of Helsinki",
+      year: 2024,
+    },
+    {
+      title: "Professional Soft Skills Learning Pathway",
+      issuer: "LinkedIn",
+      year: 2023,
+    },
+    {
+      title: "Career Essentials in Project Management",
+      issuer: "Microsoft",
+      year: 2024,
+    },
+    {
+      title: "Managing Projects",
+      issuer: "Project Management Institute",
+      year: 2024,
+    },
+    {
+      title: "Introduction to Responsible AI",
+      issuer: "Google",
+      year: 2024,
     },
   ]
 
@@ -104,7 +129,7 @@ export default function Certifications() {
   return (
     <section id="certifications" className="py-20 relative overflow-hidden bg-slate-950" ref={containerRef}>
       {/* Background elements */}
-      <div className="absolute inset-0 bg-black z-0"></div>
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-violet-900/10 via-slate-900 to-slate-950 z-0"></div>
       <FloatingParticles />
 
       <div className="container mx-auto px-6 relative z-10">

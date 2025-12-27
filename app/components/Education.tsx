@@ -49,23 +49,30 @@ export default function Education() {
     {
       degree: "B.Tech in Artificial Intelligence & Machine Learning",
       institution: "Malla Reddy University",
-      period: "2022 – 20266 (Pursuing)",
-      additional: "CGPA: 8.10",
+      period: "2023 – 2027 (Pursuing)",
+      additional: "CGPA: 8.93",
       icon: BookOpen,
     },
     {
       degree: "Intermediate (12th Grade)",
-      institution: "Chaitanya Jr. College",
-      period: "2020 – 2022",
-      additional: "Percentage: 81.6%",
+      institution: "Geetanjali Jr. College",
+      period: "2021 – 2023",
+      additional: "Percentage: 86%",
       icon: Award,
+    },
+    {
+      degree: "10th Grade",
+      institution: "Kendriya Vidyalaya",
+      period: "2011 – 2021",
+      additional: "Percentage: 76%",
+      icon: GraduationCap,
     },
   ]
 
   return (
     <section id="education" className="py-20 relative overflow-hidden bg-slate-950">
       {/* Background elements */}
-      <div className="absolute inset-0 bg-black z-0"></div>
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-indigo-900/10 via-slate-900 to-slate-950 z-0"></div>
 
       <div className="container mx-auto px-6 relative z-10">
         <SectionHeading title="Education" />
