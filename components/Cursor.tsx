@@ -56,7 +56,7 @@ export default function Cursor() {
       <div
         ref={dot}
         aria-hidden
-        className="cursor-dot pointer-events-none fixed left-0 top-0 z-[121] hidden h-1.5 w-1.5 rounded-full bg-saffron [.has-cursor_&]:block"
+        className="cursor-dot pointer-events-none fixed left-0 top-0 z-[121] hidden h-1.5 w-1.5 rounded-full bg-brass [.has-cursor_&]:block"
       />
     </>
   )

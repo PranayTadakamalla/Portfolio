@@ -20,9 +20,9 @@ function Terrain() {
     const n = 120
     const pos = new Float32Array(n * n * 3)
     const col = new Float32Array(n * n * 3)
-    const a = new THREE.Color("#2a2d36")
-    const b = new THREE.Color("#ff8a3d")
-    const c = new THREE.Color("#6ee7f9")
+    const a = new THREE.Color("#2c241c")
+    const b = new THREE.Color("#d4a94f")
+    const c = new THREE.Color("#8fb3d9")
     const tmp = new THREE.Color()
     let k = 0
     for (let i = 0; i < n; i++)
@@ -73,7 +73,7 @@ function Agent() {
   const line = useMemo(() => {
     const g = new THREE.BufferGeometry().setFromPoints(PATH_POINTS)
     g.setDrawRange(0, 0)
-    return new THREE.Line(g, new THREE.LineBasicMaterial({ color: "#ffb27a", transparent: true, opacity: 0.85 }))
+    return new THREE.Line(g, new THREE.LineBasicMaterial({ color: "#e6c77f", transparent: true, opacity: 0.85 }))
   }, [])
   useFrame((_, dt) => {
     t.current = (t.current + dt / 7) % 1.15
@@ -86,7 +86,7 @@ function Agent() {
       halo.current.position.copy(p)
       const target = inBarrier ? 3.2 : u >= 1 ? 2.2 + Math.sin(t.current * 30) * 0.3 : 1
       halo.current.scale.setScalar(THREE.MathUtils.lerp(halo.current.scale.x, target, 0.15))
-      ;(halo.current.material as THREE.MeshBasicMaterial).color.set(inBarrier || u >= 1 ? "#6ee7f9" : "#ff8a3d")
+      ;(halo.current.material as THREE.MeshBasicMaterial).color.set(inBarrier || u >= 1 ? "#8fb3d9" : "#d4a94f")
     }
   })
   return (
@@ -98,7 +98,7 @@ function Agent() {
       </mesh>
       <mesh ref={halo}>
         <sphereGeometry args={[0.09, 16, 16]} />
-        <meshBasicMaterial color="#ff8a3d" transparent opacity={0.35} depthWrite={false} />
+        <meshBasicMaterial color="#d4a94f" transparent opacity={0.35} depthWrite={false} />
       </mesh>
     </>
   )

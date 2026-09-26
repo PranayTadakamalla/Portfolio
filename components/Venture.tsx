@@ -26,7 +26,7 @@ function Ticket() {
   return (
     <div className="relative mx-auto w-full max-w-[340px] [perspective:900px]">
       <motion.div
-        className="relative flex overflow-hidden rounded-2xl bg-bone text-ink shadow-[0_30px_80px_-20px_rgba(255,138,61,.45)]"
+        className="relative flex overflow-hidden rounded-2xl bg-bone text-ink shadow-[0_30px_80px_-20px_rgba(212,169,79,.45)]"
         initial={{ rotateX: 18, rotateZ: -6, y: 30, opacity: 0 }}
         whileInView={{ rotateX: 8, rotateZ: -4, y: 0, opacity: 1 }}
         viewport={{ once: true }}
@@ -58,7 +58,7 @@ function Ticket() {
               <span key={i} className={on ? "bg-ink" : ""} />
             ))}
             <motion.span
-              className="absolute inset-x-0 h-6 bg-gradient-to-b from-transparent via-saffron/70 to-transparent"
+              className="absolute inset-x-0 h-6 bg-gradient-to-b from-transparent via-brass/70 to-transparent"
               animate={{ top: ["-20%", "100%"] }}
               transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut", repeatType: "reverse" }}
             />
@@ -81,15 +81,15 @@ function ReadAlong() {
     <div className="mx-auto w-full max-w-[380px] rounded-2xl border border-white/10 bg-ink/80 p-5 backdrop-blur">
       <div className="flex items-center justify-between font-mono text-[9px] uppercase tracking-[0.25em] text-bone-3">
         <span>Listening</span>
-        <span className="flex items-center gap-1.5 text-glacier">
-          <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-glacier" /> offline
+        <span className="flex items-center gap-1.5 text-scarf">
+          <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-scarf" /> offline
         </span>
       </div>
       <div className="mt-4 flex h-14 items-center gap-[3px]" aria-hidden>
         {Array.from({ length: 42 }).map((_, k) => (
           <motion.span
             key={k}
-            className="w-full rounded-full bg-glacier/70"
+            className="w-full rounded-full bg-scarf/70"
             animate={{ height: ["18%", `${25 + ((k * 37) % 70)}%`, "22%"] }}
             transition={{ duration: 0.9 + (k % 5) * 0.12, repeat: Infinity, delay: k * 0.03, ease: "easeInOut" }}
           />
@@ -101,7 +101,7 @@ function ReadAlong() {
             key={k}
             className={`rounded-md px-1 transition-colors duration-300 ${
               k < i ? "text-bone" : "text-bone-3/60"
-            } ${k === i - 1 ? "bg-saffron/20 text-saffron" : ""}`}
+            } ${k === i - 1 ? "bg-brass/20 text-brass" : ""}`}
           >
             {w}
           </span>
@@ -122,13 +122,13 @@ export default function Venture() {
       <motion.div
         aria-hidden
         style={{ x }}
-        className="pointer-events-none absolute left-0 top-10 select-none whitespace-nowrap font-display text-[28vw] font-semibold leading-none tracking-tightest text-transparent [-webkit-text-stroke:1px_rgba(236,232,225,0.06)]"
+        className="pointer-events-none absolute left-0 top-10 select-none whitespace-nowrap font-display text-[28vw] font-semibold leading-none tracking-tightest text-transparent [-webkit-text-stroke:1px_rgba(239,228,207,0.06)]"
       >
         221B LABS · 221B LABS
       </motion.div>
       <div className="wrap relative">
         <div id="venture-title">
-          <SectionHeader index="04" eyebrow={`Venture · ${venture.period}`} title="221B Labs —" accent="where ideas get shipped." intro={venture.intro} />
+          <SectionHeader index="03" eyebrow={`Venture · ${venture.period}`} title="221B Labs —" accent="where ideas get shipped." intro={venture.intro} />
         </div>
 
         <div className="grid gap-6 md:grid-cols-2">
@@ -142,12 +142,12 @@ export default function Venture() {
                 <div className="relative grid min-h-[280px] place-items-center overflow-hidden border-b border-white/[0.06] bg-ink-2 p-8">
                   <div
                     aria-hidden
-                    className={`absolute inset-0 ${i === 0 ? "bg-[radial-gradient(circle_at_30%_20%,rgba(255,138,61,.18),transparent_60%)]" : "bg-[radial-gradient(circle_at_70%_30%,rgba(110,231,249,.14),transparent_60%)]"}`}
+                    className={`absolute inset-0 ${i === 0 ? "bg-[radial-gradient(circle_at_30%_20%,rgba(212,169,79,.18),transparent_60%)]" : "bg-[radial-gradient(circle_at_70%_30%,rgba(143,179,217,.14),transparent_60%)]"}`}
                   />
                   <div className="relative w-full">{i === 0 ? <Ticket /> : <ReadAlong />}</div>
                 </div>
                 <div className="flex flex-1 flex-col p-6 md:p-8">
-                  <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-bone-3">{p.kind}</p>
+                  <p className="font-type text-[11px] uppercase tracking-[0.2em] text-bone-3">{p.kind}</p>
                   <h3 className="mt-2 font-display text-3xl tracking-tight text-bone md:text-4xl">{p.name}</h3>
                   <p className="mt-4 text-[15px] leading-relaxed text-bone-2">{p.body}</p>
                   <dl className="mt-6 grid grid-cols-2 gap-4">
@@ -172,18 +172,18 @@ export default function Venture() {
         </div>
 
         <Reveal className="mt-6">
-          <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-bone-3">
+          <p className="font-type text-[11px] uppercase tracking-[0.2em] text-bone-3">
             {venture.name} · {venture.note} · Ideathon 4.0 runner-up · National Entrepreneurship Challenge 2026, Round 2
           </p>
         </Reveal>
 
         {/* interstitial quote */}
         <figure className="mx-auto mt-28 max-w-4xl text-center md:mt-40">
-          <span aria-hidden className="font-serif text-7xl leading-none text-saffron">“</span>
+          <span aria-hidden className="font-serif text-7xl leading-none text-brass">“</span>
           <blockquote className="font-serif text-[clamp(2rem,5vw,4.2rem)] italic leading-[1.05] text-bone">
-            <SplitWords text={quotes[1].text} stagger={0.06} />
+            <SplitWords text={quotes.kay.text} stagger={0.06} />
           </blockquote>
-          <figcaption className="mt-6 font-mono text-[11px] uppercase tracking-[0.3em] text-bone-3">— {quotes[1].source}</figcaption>
+          <figcaption className="mt-6 font-type text-[11px] uppercase tracking-[0.3em] text-bone-3">— {quotes.kay.source}</figcaption>
         </figure>
       </div>
     </section>

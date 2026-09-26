@@ -14,7 +14,7 @@ function Row({ items, reverse, dur }: { items: string[]; reverse?: boolean; dur:
             key={i}
             className="mr-3 inline-flex shrink-0 items-center gap-3 whitespace-nowrap rounded-full border border-white/10 px-6 py-3 font-display text-lg text-bone md:text-2xl"
           >
-            <span className="h-1.5 w-1.5 rounded-full bg-saffron" />
+            <span className="h-1.5 w-1.5 rounded-full bg-brass" />
             {s}
           </span>
         ))}
@@ -30,7 +30,7 @@ export default function Skills() {
     <section id="skills" className="section" aria-labelledby="skills-title">
       <div className="wrap">
         <div id="skills-title">
-          <SectionHeader index="07" eyebrow="Toolkit" title="Skills &" accent="certifications." />
+          <SectionHeader index="01b" eyebrow="Toolkit" title="Skills &" accent="certifications." />
         </div>
       </div>
       <Row items={all.slice(0, half)} dur="55s" />
@@ -40,7 +40,7 @@ export default function Skills() {
         {skills.map((g, i) => (
           <Reveal key={g.group} delay={i * 0.08}>
             <div className="card h-full p-6">
-              <h3 className="font-mono text-[11px] uppercase tracking-[0.2em] text-saffron">{g.group}</h3>
+              <h3 className="font-type text-[11px] uppercase tracking-[0.2em] text-brass">{g.group}</h3>
               <ul className="mt-4 flex flex-wrap gap-2">
                 {g.items.map((s) => (
                   <li key={s} className="chip">
@@ -56,7 +56,7 @@ export default function Skills() {
       <div className="wrap mt-6">
         <Reveal>
           <div className="card p-6 md:p-8">
-            <h3 className="font-mono text-[11px] uppercase tracking-[0.2em] text-saffron">Certifications</h3>
+            <h3 className="font-type text-[11px] uppercase tracking-[0.2em] text-brass">Certifications</h3>
             <ul className="mt-5 grid gap-x-8 sm:grid-cols-2 lg:grid-cols-3">
               {certifications.map((c) => (
                 <li key={c.name} className="flex items-start justify-between gap-4 border-b border-white/[0.06] py-4">

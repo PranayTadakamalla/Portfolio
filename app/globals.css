@@ -3,15 +3,17 @@
 @tailwind utilities;
 
 :root {
-  --ink: #07080b;
-  --ink-2: #0d0f14;
-  --bone: #ece8e1;
-  --bone-2: #b9b4ab;
-  --bone-3: #7d7a74;
-  --saffron: #ff8a3d;
-  --glacier: #6ee7f9;
-  --line: rgba(236, 232, 225, 0.09);
-  --line-strong: rgba(236, 232, 225, 0.18);
+  --oxblood: #8e2b2b;
+  --ink: #0f0c0a;
+  --brass: #d4a94f;
+  --ink-2: #17120e;
+  --bone: #efe4cf;
+  --bone-2: #c2b59b;
+  --bone-3: #8a7e6a;
+  --brass: #d4a94f;
+  --scarf: #8fb3d9;
+  --line: rgba(239,228,207, 0.09);
+  --line-strong: rgba(239,228,207, 0.18);
   --gutter: clamp(1rem, 4vw, 3rem);
   color-scheme: dark;
 }
@@ -36,7 +38,7 @@ body.is-loading {
 }
 
 ::selection {
-  background: var(--saffron);
+  background: var(--brass);
   color: var(--ink);
 }
 
@@ -49,14 +51,14 @@ body.is-loading {
     @apply relative py-24 md:py-36;
   }
   .eyebrow {
-    @apply inline-flex items-center gap-3 font-mono text-[11px] uppercase tracking-[0.28em] text-bone-3;
+    @apply inline-flex items-center gap-3 font-type text-[12px] uppercase tracking-[0.22em] text-bone-3;
   }
   .eyebrow::before {
     content: "";
-    @apply h-px w-8 bg-saffron;
+    @apply h-px w-8 bg-brass;
   }
   .h-display {
-    @apply font-display font-medium tracking-tightest text-bone;
+    @apply font-display font-semibold tracking-tightest text-bone;
     font-size: clamp(2.6rem, 7.2vw, 6.4rem);
     line-height: 0.95;
   }
@@ -66,14 +68,22 @@ body.is-loading {
     line-height: 1;
   }
   .serif-accent {
-    @apply font-serif italic font-normal text-saffron;
+    @apply font-serif italic font-medium text-brass;
     letter-spacing: -0.01em;
   }
   .card {
     @apply relative rounded-3xl border border-white/[0.08] bg-white/[0.025] backdrop-blur-sm;
   }
   .chip {
-    @apply inline-flex items-center rounded-full border border-white/10 px-3 py-1 font-mono text-[11px] tracking-wide text-bone-2;
+    @apply inline-flex items-center rounded-full border border-white/10 px-3 py-1 font-type text-[11px] tracking-wide text-bone-2;
+  }
+  /* a manila case-file label */
+  .tag-file {
+    @apply inline-flex items-center gap-2 rounded-sm bg-bone px-2.5 py-1 font-type text-[11px] uppercase tracking-[0.18em] text-ink;
+  }
+  .stamp {
+    @apply inline-block rotate-[-8deg] rounded-sm border-2 border-oxblood-soft px-3 py-1 font-type text-sm uppercase tracking-[0.25em] text-oxblood-soft;
+    mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='40'><filter id='f'><feTurbulence baseFrequency='.9' numOctaves='2'/><feColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -2.2 1.6'/></filter><rect width='120' height='40' filter='url(%23f)'/></svg>");
   }
   .link-underline {
     background: linear-gradient(currentColor, currentColor) 0 100% / 0 1px no-repeat;
@@ -92,7 +102,7 @@ body.is-loading {
   z-index: 200;
   padding: 0.6rem 1rem;
   border-radius: 999px;
-  background: var(--saffron);
+  background: var(--brass);
   color: var(--ink);
   font-weight: 600;
 }
@@ -101,9 +111,39 @@ body.is-loading {
 }
 
 :focus-visible {
-  outline: 2px solid var(--glacier);
+  outline: 2px solid var(--scarf);
   outline-offset: 3px;
   border-radius: 6px;
+}
+
+/* gaslight vignette + drifting London fog */
+.fog {
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  background:
+    radial-gradient(ellipse at 50% -10%, rgba(212, 169, 79, 0.07), transparent 55%),
+    radial-gradient(ellipse at 50% 120%, rgba(0, 0, 0, 0.6), transparent 60%);
+}
+.fog::before,
+.fog::after {
+  content: "";
+  position: absolute;
+  inset: -20% -50%;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='600' height='300'><filter id='f'><feTurbulence type='fractalNoise' baseFrequency='.006 .012' numOctaves='3' seed='7'/><feColorMatrix values='0 0 0 0 .94  0 0 0 0 .9  0 0 0 0 .82  0 0 0 .55 -.18'/></filter><rect width='600' height='300' filter='url(%23f)'/></svg>");
+  background-size: 1200px 600px;
+  opacity: 0.09;
+  animation: fog 90s linear infinite;
+}
+.fog::after {
+  background-size: 1600px 800px;
+  opacity: 0.06;
+  animation-duration: 140s;
+  animation-direction: reverse;
+}
+@keyframes fog {
+  to { transform: translateX(25%); }
 }
 
 /* film grain over everything, very subtle */
@@ -151,7 +191,7 @@ body.is-loading {
   inset: 0;
   padding: 1px;
   border-radius: inherit;
-  background: radial-gradient(420px circle at var(--mx, 50%) var(--my, 50%), rgba(255, 138, 61, 0.55), transparent 45%);
+  background: radial-gradient(420px circle at var(--mx, 50%) var(--my, 50%), rgba(212,169,79, 0.55), transparent 45%);
   -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
   -webkit-mask-composite: xor;
   mask-composite: exclude;
@@ -178,7 +218,52 @@ body.is-loading {
     animation-iteration-count: 1 !important;
     transition-duration: 0.001ms !important;
   }
-  .grain {
+  .grain,
+  .fog::before,
+  .fog::after {
     display: none;
   }
+}
+
+/* returning visitors skip the case-file intro without a flash */
+html.seen .loader-root {
+  display: none;
+}
+
+/* page change: a lens opens from the centre onto the new page. Pure CSS (@property animates the hole). */
+@property --iris {
+  syntax: "<length>";
+  inherits: false;
+  initial-value: 0px;
+}
+.page-iris {
+  position: fixed;
+  inset: 0;
+  z-index: 140;
+  pointer-events: none;
+  background: var(--ink);
+  -webkit-mask: radial-gradient(circle at 50% 50%, transparent var(--iris), #000 calc(var(--iris) + 1px));
+  mask: radial-gradient(circle at 50% 50%, transparent var(--iris), #000 calc(var(--iris) + 1px));
+  animation: iris 0.95s cubic-bezier(0.76, 0, 0.24, 1) 0.05s forwards;
+}
+.page-iris::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: calc(var(--iris) * 2);
+  height: calc(var(--iris) * 2);
+  border-radius: 50%;
+  box-shadow: 0 0 0 3px var(--brass), 0 0 60px 6px rgba(212, 169, 79, 0.35);
+  transform: translate(-50%, -50%);
+  animation: iris 0.95s cubic-bezier(0.76, 0, 0.24, 1) 0.05s forwards;
+}
+@keyframes iris {
+  0% { --iris: 0px; opacity: 1; }
+  85% { opacity: 1; }
+  100% { --iris: 110vmax; opacity: 0; }
+}
+html:not(.seen) .page-iris,
+html.fresh .page-iris {
+  display: none;
 }

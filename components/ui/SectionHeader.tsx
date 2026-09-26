@@ -18,7 +18,7 @@ export default function SectionHeader({
       <div className="md:col-span-8">
         <Reveal>
           <span className="eyebrow">
-            <span className="text-saffron">{index}</span> {eyebrow}
+            <span className="text-brass">{index}</span> {eyebrow}
           </span>
         </Reveal>
         <h2 className="h-section mt-6">

@@ -4,18 +4,21 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        ink: { DEFAULT: "#07080b", 2: "#0d0f14", 3: "#14171f" },
-        bone: { DEFAULT: "#ece8e1", 2: "#b9b4ab", 3: "#7d7a74" },
-        saffron: { DEFAULT: "#ff8a3d", soft: "#ffb27a" },
-        glacier: { DEFAULT: "#6ee7f9", soft: "#a5f0fb" },
+        // 221B Baker Street at night: walnut, parchment, brass lamplight, Sherlock's blue scarf, oxblood wax.
+        ink: { DEFAULT: "#0f0c0a", 2: "#17120e", 3: "#211a14" },
+        bone: { DEFAULT: "#efe4cf", 2: "#c2b59b", 3: "#8a7e6a" },
+        brass: { DEFAULT: "#d4a94f", soft: "#e6c77f", deep: "#8c6a2a" },
+        scarf: { DEFAULT: "#8fb3d9", soft: "#bcd3ea", deep: "#2c4a6e" },
+        oxblood: { DEFAULT: "#8e2b2b", soft: "#b4483f" },
       },
       fontFamily: {
-        display: ['"Space Grotesk Variable"', '"Noto Sans Telugu"', "system-ui", "sans-serif"],
+        display: ['"Playfair Display Variable"', '"Noto Sans Telugu"', "Georgia", "serif"],
         sans: ['"Inter Variable"', "system-ui", "sans-serif"],
-        serif: ['"Instrument Serif"', '"Noto Serif Devanagari"', "Georgia", "serif"],
+        serif: ['"Cormorant Garamond"', "Georgia", "serif"],
+        type: ['"Special Elite"', '"Courier New"', "monospace"],
         mono: ['"JetBrains Mono Variable"', "ui-monospace", "monospace"],
       },
-      letterSpacing: { tightest: "-0.055em" },
+      letterSpacing: { tightest: "-0.04em" },
     },
   },
   plugins: [],
