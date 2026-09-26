@@ -20,7 +20,7 @@ pdfmetrics.registerFontFamily("Carlito", normal="Carlito", bold="Carlito-Bold",
 
 NAVY = HexColor("#1F3A68")
 GREY = HexColor("#555555")
-BODY = 9.1
+BODY = 9.3
 
 name_s = ParagraphStyle("name", fontName="Carlito-Bold", fontSize=20, leading=23, alignment=TA_CENTER, textColor=NAVY)
 tag_s = ParagraphStyle("tag", fontName="Carlito", fontSize=9.6, leading=12, alignment=TA_CENTER, textColor=GREY)
@@ -76,10 +76,11 @@ story = [
 
 story += section("About")
 story.append(Paragraph(
-    "Final-year AI &amp; ML undergraduate at Malla Reddy University and full-stack engineer, with three papers on SSRN "
-    "spanning agentic AI, cooperative multi-agent robotics and software testing. Founder and CEO of 221B Labs Private Limited, "
-    "which runs campus event ticketing and is building a speech-based reading platform for Indian classrooms. Interests: "
-    "reinforcement learning, agentic AI, quantum-inspired algorithms and speech technology for Indian languages.", body_s))
+    "Final-year undergraduate in Artificial Intelligence and Machine Learning at Malla Reddy University. Research work covers "
+    "exploration in agentic AI, cooperative multi-agent robotics, software testing and speech-based reading support for "
+    "under-served languages, with four papers on SSRN. Founder and CEO of 221B Labs Private Limited, a software company that "
+    "runs campus event ticketing and is building a speech-based reading platform for Indian classrooms. Interests: reinforcement "
+    "learning, agentic AI, quantum-inspired algorithms and speech technology for Indian languages.", body_s))
 
 story += section("Education")
 story += [
@@ -98,16 +99,13 @@ story += [
               "Built a reproducible, tested Python codebase and live comparative demo ("
               + link(f"{GH}/final-project", "github.com/PranayTadakamalla/final-project")
               + "); manuscript in preparation for IEEE submission."]),
-    entry("<b>Student Researcher</b> — School of Engineering, Malla Reddy University | <i>AI for Cybersecurity</i>",
-          "2024 – 2025", [
-              "First author of <i>Cyber Chat Bot using GPT Model</i>, on a GPT-3.5 security advisor (MERN stack, "
-              + link(f"{GH}/CyberChat", "GitHub") + ") with authentication and NLP security filters, tested with real users.",
-              "Built " + link(f"{GH}/QuantumMessenger", "Quantum Messenger") + ", a quantum key-exchange and encryption simulation, and "
-              "a BERT + LSTM intrusion-detection pipeline evaluated on 1,000+ simulated security events."]),
 ]
 
 story += section("Publications (Preprints)")
 story.append(bullets([
+    "<b>Tadakamalla, S. P.</b>, &amp; Asad, S. M. (2026). <i>Heard in Their Own Voice: A Language-Agnostic Framework for "
+    "AI-Assisted Pronunciation and Reading Support in the World's Under-Served Languages.</i> SSRN. "
+    + link("https://ssrn.com/abstract=7488098", "ssrn.com/abstract=7488098"),
     "<b>Tadakamalla, S. P.</b>, &amp; Terala, S. (2026). <i>The Fullness That Remains: Quantum Non-Locality, Mathematical "
     "Infinity, and the Search for an Undivided Whole.</i> SSRN. " + link("https://doi.org/10.2139/ssrn.7350098", "doi:10.2139/ssrn.7350098"),
     "<b>Tadakamalla, S. P.</b>, &amp; Edukoju, G. S. (2025). <i>From Pixels to Paths: Cooperative AI for Autonomous "
@@ -124,20 +122,21 @@ story += [
               "Lead strategy, product, client delivery and hiring; run an engineering internship programme.",
               "Built Festora, the company's event ticketing platform, used to ticket 5,000+ students; official ticketing and "
               "community partner of Malla Reddy University and DataForge, a Microsoft developer community in Hyderabad.",
-              "Delivered MALCON '26 registration and QR check-in for 700+ participants, covering entry and two-day meal passes."]),
+              "Delivered the MALCON '26 registration and QR check-in system for 700+ participants, covering entry and two-day meal passes."]),
     entry("<b>Project Manager Intern</b> — Pramila Foundation", "Jan 2025 – Jun 2025", [
         "Led development of the organisation's website and mobile app; feature and UX changes raised user engagement by 85%."]),
-    entry("<b>Web Developer</b> — Unifesto, student-led event startup | built its event registration, scheduling and login system", "2025"),
 ]
 
 story += section("Projects")
 story += [
     entry("<b>Pathana Sakthi</b> — 221B Labs Private Limited | <i>Speech AI, TTS, G2P, Android</i>", "2026 – Present", [
-        "Offline read-along tutor for Classes 1–10 in Telugu, English and Hindi, aligned to the SCERT curriculum, with teacher, parent and admin dashboards.",
+        "Offline read-along tutor for Classes 1–10 in Telugu, English and Hindi, aligned to the SCERT curriculum, with teacher, "
+        "parent and admin dashboards.",
         "Developing in-house kid-calibrated Indian voices, a language model and grapheme-to-phoneme (G2P) conversion; "
         "pronunciation is scored word by word through CTC forced alignment.",
-        "Pilot plan with SCERT: 2–3 government schools, 150–300 students, targeting 75%+ read-along accuracy and 80%+ weekly teacher use."]),
-    entry("<b>Bazinga Labs</b> — LLM Code Generation Platform | <i>React.js, Node.js, LLMs</i> | " + link(f"{GH}/Bazinga_Labs", "GitHub"), "", [
+        "Pilot plan with SCERT stakeholders: 2–3 government schools and 150–300 students, targeting 75%+ read-along accuracy "
+        "and 80%+ weekly teacher use."]),
+    entry("<b>Bazinga Labs</b> — LLM Code Generation Platform | <i>React.js, Node.js, LLMs</i>", "", [
         "Generates code in Python, Java, TypeScript, React, AngularJS and Node.js through a secure, scalable API backend."]),
     entry("<b>AADHARVA</b> — AI Digital Hub for Rural Advancement | <i>Next.js, Python, Google APIs</i> | " + link(f"{GH}/AADHARVA", "GitHub"), "", [
         "Multilingual conversational assistant that guides rural users through digital services."]),
@@ -146,21 +145,18 @@ story += [
 story += section("Achievements &amp; Leadership")
 story += [
     entry("<b>2nd Place, Pitch Arena – Ideathon 4.0</b> — Malla Reddy University", "Aug 2026", [
-        "Pitched Pathana Sakthi; advanced to Round 2 of the National Entrepreneurship Challenge 2026 (E-Cell, IIT Bombay)."]),
+        "Pitched Pathana Sakthi, a 221B Labs product; advanced to Round 2 of the National Entrepreneurship Challenge 2026 (E-Cell, IIT Bombay)."]),
     entry("<b>Vice-President</b> — Microsoft Learn Student Chapter, Malla Reddy University", "Apr 2025 – Oct 2025", [
         "Led a 20-member team that ran 10+ workshops on AI, cloud and software development, reaching 5,000+ students."]),
-    entry("<b>Member</b> — Indian Knowledge Systems (IKS) Club, Malla Reddy University", "2024 – Present"),
 ]
 
 story += section("Skills, Certifications &amp; Languages")
 story += [Paragraph(s, body_s) for s in [
     "<b>AI/ML:</b> Machine Learning, Reinforcement Learning, NLP, LLMs, Prompt Engineering, Speech Recognition, Experimental Design",
-    "<b>Programming &amp; Web:</b> Python, Java, C/C++, JavaScript, TypeScript, React.js, Next.js, Node.js, Express.js, Django, "
-    "Spring Boot, REST APIs",
-    "<b>Data, Cloud &amp; Tools:</b> MongoDB, MySQL, AWS, Google Cloud Platform, CI/CD, Git, GitHub, Postman, Salesforce CRM",
-    "<b>Certifications:</b> Elements of AI (Univ. of Helsinki), Reinforcement Learning (NPTEL), Generative AI (Microsoft &amp; "
-    "LinkedIn), Responsible AI (Google), Managing Projects (PMI), Project Management (Microsoft)",
-    "<b>Languages:</b> English (professional, Cambridge B2), Hindi (full professional, C1), Telugu (native)",
+    "<b>Programming &amp; Web:</b> Python, Java, JavaScript, TypeScript, React.js, Next.js, Node.js, Express.js, Django, REST APIs, HTML/CSS",
+    "<b>Data, Cloud &amp; Tools:</b> MongoDB, MySQL, AWS, Google Cloud Platform, CI/CD, Git, GitHub, Postman",
+    "<b>Certifications:</b> Elements of AI (University of Helsinki), Reinforcement Learning (NPTEL), B2 English (Cambridge University)",
+    "<b>Languages:</b> English (professional, CEFR B2), Hindi (full professional, C1), Telugu (native)",
 ]]
 
 out = Path(__file__).with_name("Sai_Pranay_Tadakamalla_Resume.pdf")
