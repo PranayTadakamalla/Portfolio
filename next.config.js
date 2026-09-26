@@ -1,15 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  images: {
-    domains: ["media.licdn.com"],
-    unoptimized: true,
-  },
-  eslint: {
-    ignoreDuringBuilds: true,
-  },
-  typescript: {
-    ignoreBuildErrors: true,
-  },
+  reactStrictMode: true,
+  images: { formats: ["image/avif", "image/webp"] },
+  transpilePackages: ["three"],
 }
 
 module.exports = nextConfig
