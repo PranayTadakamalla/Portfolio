@@ -77,8 +77,8 @@ story = [
 story += section("About")
 story.append(Paragraph(
     "Final-year undergraduate in Artificial Intelligence and Machine Learning at Malla Reddy University. Research work covers "
-    "exploration in agentic AI, cooperative multi-agent robotics, software testing and speech-based reading support for "
-    "under-served languages, with four papers on SSRN. Founder and CEO of 221B Labs Private Limited, a software company that "
+    "exploration in agentic AI, cooperative multi-agent robotics, software testing, speech-based reading support for "
+    "under-served languages and memory limits of predictive models, with five preprints. Founder and CEO of 221B Labs Private Limited, a software company that "
     "runs campus event ticketing and is building a speech-based reading platform for Indian classrooms. Interests: reinforcement "
     "learning, agentic AI, quantum-inspired algorithms and speech technology for Indian languages.", body_s))
 
@@ -103,6 +103,9 @@ story += [
 
 story += section("Publications (Preprints)")
 story.append(bullets([
+    "<b>Tadakamalla, S. P.</b>, Prakash, S. M. R., &amp; Asad, S. M. (2026). <i>Predictive State Is Not Explanatory State: An "
+    "Exponential Memory Separation Between Forecasting and Counterfactual Auditing.</i> Preprint. "
+    + link(f"{GH}/predictive-state-not-explanatory-state", "Code &amp; paper (GitHub)"),
     "<b>Tadakamalla, S. P.</b>, &amp; Asad, S. M. (2026). <i>Heard in Their Own Voice: A Language-Agnostic Framework for "
     "AI-Assisted Pronunciation and Reading Support in the World's Under-Served Languages.</i> SSRN. "
     + link("https://ssrn.com/abstract=7488098", "ssrn.com/abstract=7488098"),
@@ -120,32 +123,35 @@ story += [
     entry("<b>Founder &amp; CEO</b> — 221B Labs Private Limited, Hyderabad | <i>Incubated at Malla Reddy University</i>",
           "Mar 2026 – Present", [
               "Lead strategy, product, client delivery and hiring; run an engineering internship programme.",
-              "Built Festora, the company's event ticketing platform, used to ticket 5,000+ students; official ticketing and "
-              "community partner of Malla Reddy University and DataForge, a Microsoft developer community in Hyderabad.",
-              "Delivered the MALCON '26 registration and QR check-in system for 700+ participants, covering entry and two-day meal passes."]),
+              "<b>Festora:</b> built the company's event ticketing platform, used to ticket 5,000+ students; official ticketing and "
+              "community partner of Malla Reddy University and DataForge, a Microsoft developer community in Hyderabad. Delivered "
+              "the MALCON '26 registration and QR check-in system for 700+ participants, covering entry and two-day meal passes.",
+              "<b>Pathana Sakthi</b> (Speech AI, TTS, G2P, Android): offline read-along tutor for Classes 1–10 in Telugu, English and "
+              "Hindi, aligned to the SCERT curriculum, with teacher, parent and admin dashboards; building kid-calibrated Indian "
+              "voices, a language model and G2P conversion, with word-level pronunciation scoring through CTC forced alignment.",
+              "Pathana Sakthi pilot with SCERT stakeholders: 2–3 government schools, 150–300 students, targeting 75%+ read-along accuracy."]),
     entry("<b>Project Manager Intern</b> — Pramila Foundation", "Jan 2025 – Jun 2025", [
         "Led development of the organisation's website and mobile app; feature and UX changes raised user engagement by 85%."]),
 ]
 
 story += section("Projects")
 story += [
-    entry("<b>Pathana Sakthi</b> — 221B Labs Private Limited | <i>Speech AI, TTS, G2P, Android</i>", "2026 – Present", [
-        "Offline read-along tutor for Classes 1–10 in Telugu, English and Hindi, aligned to the SCERT curriculum, with teacher, "
-        "parent and admin dashboards.",
-        "Developing in-house kid-calibrated Indian voices, a language model and grapheme-to-phoneme (G2P) conversion; "
-        "pronunciation is scored word by word through CTC forced alignment.",
-        "Pilot plan with SCERT stakeholders: 2–3 government schools and 150–300 students, targeting 75%+ read-along accuracy "
-        "and 80%+ weekly teacher use."]),
+    entry("<b>CTI-IDS</b> — Threat Intelligence &amp; Intrusion Detection | <i>BERT, LSTM, CNN, Next.js, Python</i> | "
+          + link(f"{GH}/CTI-and-IDS-using-BERT-and-LSTM", "GitHub"), "", [
+        "Detects phishing and malware from email text (BERT), network packet sequences (LSTM) and screenshots (CNN); "
+        "92% accuracy for BERT; enriched with VirusTotal, URLhaus and Shodan feeds."]),
     entry("<b>Bazinga Labs</b> — LLM Code Generation Platform | <i>React.js, Node.js, LLMs</i>", "", [
         "Generates code in Python, Java, TypeScript, React, AngularJS and Node.js through a secure, scalable API backend."]),
     entry("<b>AADHARVA</b> — AI Digital Hub for Rural Advancement | <i>Next.js, Python, Google APIs</i> | " + link(f"{GH}/AADHARVA", "GitHub"), "", [
         "Multilingual conversational assistant that guides rural users through digital services."]),
+    entry("<b>CharChiru</b> — AI Video Generation Platform | <i>React, TypeScript, Node.js, Gemini API</i> | " + link(f"{GH}/CharChiru", "GitHub"), "", [
+        "Turns text prompts into styled short videos through a minimal, creator-focused interface."]),
 ]
 
 story += section("Achievements &amp; Leadership")
 story += [
     entry("<b>2nd Place, Pitch Arena – Ideathon 4.0</b> — Malla Reddy University", "Aug 2026", [
-        "Pitched Pathana Sakthi, a 221B Labs product; advanced to Round 2 of the National Entrepreneurship Challenge 2026 (E-Cell, IIT Bombay)."]),
+        "Pitched Pathana Sakthi; advanced to Round 2 of the National Entrepreneurship Challenge 2026 (E-Cell, IIT Bombay)."]),
     entry("<b>Vice-President</b> — Microsoft Learn Student Chapter, Malla Reddy University", "Apr 2025 – Oct 2025", [
         "Led a 20-member team that ran 10+ workshops on AI, cloud and software development, reaching 5,000+ students."]),
 ]
