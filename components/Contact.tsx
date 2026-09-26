@@ -23,11 +23,11 @@ export default function Contact() {
 
   return (
     <section id="contact" className="section relative overflow-hidden" aria-labelledby="contact-title">
-      <div aria-hidden className="pointer-events-none absolute bottom-[-30vh] left-1/2 h-[70vh] w-[90vw] -translate-x-1/2 rounded-full bg-saffron/[0.12] blur-[160px]" />
+      <div aria-hidden className="pointer-events-none absolute bottom-[-30vh] left-1/2 h-[70vh] w-[90vw] -translate-x-1/2 rounded-full bg-brass/[0.12] blur-[160px]" />
       <div className="wrap relative">
         <Reveal>
           <span className="eyebrow">
-            <span className="text-saffron">09</span> Contact
+            <span className="text-brass">07</span> Contact
           </span>
         </Reveal>
         <h2 id="contact-title" className="h-display mt-8 max-w-[16ch]">
@@ -48,7 +48,7 @@ export default function Contact() {
                   type="button"
                   onClick={copy}
                   data-cursor="copy"
-                  className="group inline-flex items-center gap-3 rounded-full bg-bone px-6 py-4 text-left text-ink transition-colors hover:bg-saffron"
+                  className="group inline-flex items-center gap-3 rounded-full bg-bone px-6 py-4 text-left text-ink transition-colors hover:bg-brass"
                 >
                   <span className="font-display text-base md:text-lg">{profile.email}</span>
                   <span className="rounded-full bg-ink px-3 py-1 font-mono text-[10px] text-bone" aria-live="polite">
@@ -59,7 +59,7 @@ export default function Contact() {
             </div>
             <dl className="mt-10 grid grid-cols-2 gap-6 text-[14px]">
               <div>
-                <dt className="font-mono text-[10px] uppercase tracking-[0.2em] text-bone-3">Phone</dt>
+                <dt className="font-type text-[10px] uppercase tracking-[0.2em] text-bone-3">Phone</dt>
                 <dd className="mt-1">
                   <a href={`tel:${profile.phone.replace(/\s/g, "")}`} className="link-underline text-bone">
                     {profile.phone}
@@ -67,7 +67,7 @@ export default function Contact() {
                 </dd>
               </div>
               <div>
-                <dt className="font-mono text-[10px] uppercase tracking-[0.2em] text-bone-3">Based in</dt>
+                <dt className="font-type text-[10px] uppercase tracking-[0.2em] text-bone-3">Based in</dt>
                 <dd className="mt-1 text-bone">{profile.location}</dd>
               </div>
             </dl>
@@ -79,7 +79,7 @@ export default function Contact() {
                 ["SSRN", profile.links.ssrn],
               ].map(([l, h]) => (
                 <li key={l}>
-                  <a href={h} target="_blank" rel="noreferrer" className="chip px-4 py-2 text-[12px] hover:border-saffron hover:text-saffron">
+                  <a href={h} target="_blank" rel="noreferrer" className="chip px-4 py-2 text-[12px] hover:border-brass hover:text-brass">
                     {l} ↗
                   </a>
                 </li>
@@ -95,30 +95,30 @@ export default function Contact() {
             }}
           >
             <label className="block">
-              <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-bone-3">Your name</span>
+              <span className="font-type text-[10px] uppercase tracking-[0.2em] text-bone-3">Your name</span>
               <input
                 required
                 value={form.name}
                 onChange={(e) => setForm({ ...form, name: e.target.value })}
                 autoComplete="name"
-                className="mt-2 w-full border-b border-white/15 bg-transparent py-3 font-display text-xl text-bone outline-none transition-colors placeholder:text-bone-3/50 focus:border-saffron"
+                className="mt-2 w-full border-b border-white/15 bg-transparent py-3 font-display text-xl text-bone outline-none transition-colors placeholder:text-bone-3/50 focus:border-brass"
                 placeholder="Ada Lovelace"
               />
             </label>
             <label className="mt-8 block">
-              <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-bone-3">Message</span>
+              <span className="font-type text-[10px] uppercase tracking-[0.2em] text-bone-3">Message</span>
               <textarea
                 required
                 rows={4}
                 value={form.message}
                 onChange={(e) => setForm({ ...form, message: e.target.value })}
-                className="mt-2 w-full resize-none border-b border-white/15 bg-transparent py-3 text-[16px] text-bone outline-none transition-colors placeholder:text-bone-3/50 focus:border-saffron"
+                className="mt-2 w-full resize-none border-b border-white/15 bg-transparent py-3 text-[16px] text-bone outline-none transition-colors placeholder:text-bone-3/50 focus:border-brass"
                 placeholder="I'd love to talk about…"
               />
             </label>
             <button
               type="submit"
-              className="mt-8 inline-flex w-full items-center justify-center gap-3 rounded-full border border-saffron/60 px-6 py-4 text-sm text-saffron transition-colors hover:bg-saffron hover:text-ink"
+              className="mt-8 inline-flex w-full items-center justify-center gap-3 rounded-full border border-brass/60 px-6 py-4 text-sm text-brass transition-colors hover:bg-brass hover:text-ink"
             >
               Send via email ↗
             </button>

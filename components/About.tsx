@@ -79,7 +79,7 @@ function Portrait() {
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink via-ink/10 to-transparent" />
         <div
           className="pointer-events-none absolute inset-0 opacity-0 mix-blend-soft-light transition-opacity duration-500 group-hover:opacity-100"
-          style={{ background: "radial-gradient(360px circle at var(--mx,50%) var(--my,50%), rgba(255,178,122,.55), transparent 60%)" }}
+          style={{ background: "radial-gradient(360px circle at var(--mx,50%) var(--my,50%), rgba(230,199,127,.55), transparent 60%)" }}
         />
         {/* frame corners */}
         {["left-4 top-4 border-l border-t", "right-4 top-4 border-r border-t", "bottom-4 left-4 border-b border-l", "bottom-4 right-4 border-b border-r"].map((c) => (
@@ -88,9 +88,9 @@ function Portrait() {
         <div className="absolute inset-x-5 bottom-5 flex items-end justify-between [transform:translateZ(40px)]">
           <div>
             <p className="font-display text-lg text-bone">{profile.name}</p>
-            <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-bone-2">Founder · Researcher · Writer</p>
+            <p className="font-type text-[10px] uppercase tracking-[0.2em] text-bone-2">Founder · Researcher · Writer</p>
           </div>
-          <span className="grid h-10 w-10 place-items-center rounded-full border border-saffron/60 font-mono text-[10px] text-saffron">
+          <span className="grid h-10 w-10 place-items-center rounded-full border border-brass/60 font-mono text-[10px] text-brass">
             ✦
           </span>
         </div>
@@ -105,7 +105,7 @@ export default function About() {
       <div className="wrap">
         <Reveal>
           <span className="eyebrow">
-            <span className="text-saffron">01</span> About
+            <span className="text-brass">01</span> About
           </span>
         </Reveal>
         <h2 id="about-title" className="sr-only">
@@ -127,7 +127,7 @@ export default function About() {
             <dl className="grid grid-cols-2 gap-px overflow-hidden rounded-3xl border border-white/[0.08] bg-white/[0.06]">
               {about.stats.map((s) => (
                 <div key={s.label} className="bg-ink p-5 md:p-7">
-                  <dt className="font-mono text-[10px] uppercase tracking-[0.2em] text-bone-3">{s.label}</dt>
+                  <dt className="font-type text-[10px] uppercase tracking-[0.2em] text-bone-3">{s.label}</dt>
                   <dd className="mt-3 font-display text-4xl tracking-tight text-bone md:text-5xl">
                     <Counter value={s.value} suffix={s.suffix} decimals={s.decimals ?? 0} />
                   </dd>

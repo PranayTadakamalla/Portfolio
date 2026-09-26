@@ -7,13 +7,13 @@ import SectionHeader from "./ui/SectionHeader"
 import { Reveal } from "./ui/Reveal"
 
 const KIND_COLOR: Record<string, string> = {
-  Award: "text-saffron border-saffron/40",
-  Venture: "text-saffron border-saffron/40",
-  Research: "text-glacier border-glacier/40",
+  Award: "text-brass border-brass/40",
+  Venture: "text-brass border-brass/40",
+  Research: "text-scarf border-scarf/40",
   Leadership: "text-bone border-white/25",
   Experience: "text-bone border-white/25",
   Club: "text-bone-2 border-white/15",
-  Education: "text-glacier border-glacier/40",
+  Education: "text-scarf border-scarf/40",
 }
 
 export default function Journey() {
@@ -39,13 +39,13 @@ export default function Journey() {
           <motion.span
             aria-hidden
             style={{ scaleY }}
-            className="absolute left-0 top-0 h-full w-px origin-top bg-gradient-to-b from-saffron via-saffron to-glacier md:left-1/2"
+            className="absolute left-0 top-0 h-full w-px origin-top bg-gradient-to-b from-brass via-brass to-scarf md:left-1/2"
           />
           {timeline.map((t, i) => (
             <li key={t.title + t.period} className={`relative pb-14 pl-8 md:w-1/2 md:pl-0 ${i % 2 ? "md:ml-auto md:pl-14" : "md:pr-14 md:text-right"}`}>
               <motion.span
                 aria-hidden
-                className={`absolute left-0 top-1.5 h-3 w-3 -translate-x-1/2 rounded-full border-2 border-ink bg-saffron ${i % 2 ? "md:left-0" : "md:left-auto md:right-0 md:translate-x-1/2"}`}
+                className={`absolute left-0 top-1.5 h-3 w-3 -translate-x-1/2 rounded-full border-2 border-ink bg-brass ${i % 2 ? "md:left-0" : "md:left-auto md:right-0 md:translate-x-1/2"}`}
                 initial={{ scale: 0 }}
                 whileInView={{ scale: 1 }}
                 viewport={{ once: true, margin: "-40% 0px -40% 0px" }}
@@ -57,7 +57,7 @@ export default function Journey() {
                   <span className={`chip ${KIND_COLOR[t.kind] ?? ""}`}>{t.kind}</span>
                 </div>
                 <h3 className="mt-3 font-display text-2xl tracking-tight text-bone md:text-[1.75rem]">{t.title}</h3>
-                <p className="mt-1 text-[14px] text-saffron-soft">{t.org}</p>
+                <p className="mt-1 text-[14px] text-brass-soft">{t.org}</p>
                 <p className={`mt-3 max-w-md text-[15px] leading-relaxed text-bone-2 ${i % 2 ? "" : "md:ml-auto"}`}>{t.body}</p>
               </Reveal>
             </li>

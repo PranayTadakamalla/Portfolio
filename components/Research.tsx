@@ -9,7 +9,8 @@ import { Reveal } from "./ui/Reveal"
 
 const TunnelScene = dynamic(() => import("./three/TunnelScene"), { ssr: false })
 
-const TONE = { muted: "#7d7a74", accent: "#ff8a3d", accent2: "#6ee7f9" }
+// Chart marks use the validated data palette (brass #b8862f, scarf #5a8fd4); UI accents stay brighter.
+const TONE = { muted: "#8a7e6a", accent: "#b8862f", accent2: "#5a8fd4" }
 
 function ResultsChart() {
   const ref = useRef<HTMLDivElement>(null)
@@ -18,7 +19,7 @@ function ResultsChart() {
   return (
     <figure ref={ref} className="mt-8">
       <figcaption className="mb-4 flex items-baseline justify-between gap-4">
-        <span className="font-mono text-[11px] uppercase tracking-[0.2em] text-bone-3">Normalised return · 40 seeds</span>
+        <span className="font-type text-[11px] uppercase tracking-[0.2em] text-bone-3">Normalised return · 40 seeds</span>
         <span className="font-mono text-[11px] text-bone-2">{R.pValue}</span>
       </figcaption>
       <div className="relative space-y-4" onPointerLeave={() => setHover(null)}>
@@ -96,10 +97,10 @@ function MemoryGap() {
     <figure className="mt-6">
       <div className="mb-3 flex flex-wrap gap-4 font-mono text-[11px] text-bone-2">
         <span className="flex items-center gap-2">
-          <span className="h-0.5 w-4 rounded bg-glacier" /> Forecasting · log₂(t+1)
+          <span className="h-0.5 w-4 rounded bg-[#5a8fd4]" /> Forecasting · log₂(t+1)
         </span>
         <span className="flex items-center gap-2">
-          <span className="h-0.5 w-4 rounded bg-saffron" /> Counterfactual audit · t
+          <span className="h-0.5 w-4 rounded bg-[#b8862f]" /> Counterfactual audit · t
         </span>
       </div>
       <svg
@@ -117,37 +118,37 @@ function MemoryGap() {
       >
         {[0, 16, 32, 48, 64].map((b) => (
           <g key={b}>
-            <line x1={pad.l} x2={W - pad.r} y1={y(b)} y2={y(b)} stroke="rgba(236,232,225,.06)" />
-            <text x={pad.l - 6} y={y(b) + 3} textAnchor="end" fontSize="8" fill="#7d7a74" fontFamily="monospace">
+            <line x1={pad.l} x2={W - pad.r} y1={y(b)} y2={y(b)} stroke="rgba(239,228,207,.06)" />
+            <text x={pad.l - 6} y={y(b) + 3} textAnchor="end" fontSize="8" fill="#8a7e6a" fontFamily="monospace">
               {b}
             </text>
           </g>
         ))}
-        <text x={W - pad.r} y={H - 8} textAnchor="end" fontSize="8" fill="#7d7a74" fontFamily="monospace">
+        <text x={W - pad.r} y={H - 8} textAnchor="end" fontSize="8" fill="#8a7e6a" fontFamily="monospace">
           history length t →
         </text>
-        <path d={path(audit)} fill="none" stroke="#ff8a3d" strokeWidth="2" strokeLinecap="round" />
-        <path d={path(pred)} fill="none" stroke="#6ee7f9" strokeWidth="2" strokeLinecap="round" />
-        <text x={x(T) - 4} y={y(T) + 12} textAnchor="end" fontSize="9" fill="#ece8e1">
+        <path d={path(audit)} fill="none" stroke="#b8862f" strokeWidth="2" strokeLinecap="round" />
+        <path d={path(pred)} fill="none" stroke="#5a8fd4" strokeWidth="2" strokeLinecap="round" />
+        <text x={x(T) - 4} y={y(T) + 12} textAnchor="end" fontSize="9" fill="#efe4cf">
           64 bits
         </text>
-        <text x={x(T) - 4} y={y(Math.log2(T + 1)) - 6} textAnchor="end" fontSize="9" fill="#ece8e1">
+        <text x={x(T) - 4} y={y(Math.log2(T + 1)) - 6} textAnchor="end" fontSize="9" fill="#efe4cf">
           ≈6 bits
         </text>
         {ht !== null && (
           <g>
-            <line x1={x(ht)} x2={x(ht)} y1={pad.t} y2={H - pad.b} stroke="rgba(236,232,225,.3)" strokeDasharray="2 3" />
-            <circle cx={x(ht)} cy={y(ht)} r="4" fill="#ff8a3d" stroke="#07080b" strokeWidth="2" />
-            <circle cx={x(ht)} cy={y(Math.log2(ht + 1))} r="4" fill="#6ee7f9" stroke="#07080b" strokeWidth="2" />
+            <line x1={x(ht)} x2={x(ht)} y1={pad.t} y2={H - pad.b} stroke="rgba(239,228,207,.3)" strokeDasharray="2 3" />
+            <circle cx={x(ht)} cy={y(ht)} r="4" fill="#b8862f" stroke="#0f0c0a" strokeWidth="2" />
+            <circle cx={x(ht)} cy={y(Math.log2(ht + 1))} r="4" fill="#5a8fd4" stroke="#0f0c0a" strokeWidth="2" />
             <g transform={`translate(${Math.min(x(ht) + 8, W - 108)},${pad.t + 4})`}>
-              <rect width="100" height="40" rx="6" fill="#0d0f14" stroke="rgba(236,232,225,.12)" />
-              <text x="8" y="14" fontSize="9" fill="#b9b4ab" fontFamily="monospace">
+              <rect width="100" height="40" rx="6" fill="#17120e" stroke="rgba(239,228,207,.12)" />
+              <text x="8" y="14" fontSize="9" fill="#c2b59b" fontFamily="monospace">
                 t = {ht}
               </text>
-              <text x="8" y="27" fontSize="9" fill="#ece8e1" fontFamily="monospace">
+              <text x="8" y="27" fontSize="9" fill="#efe4cf" fontFamily="monospace">
                 forecast {Math.log2(ht + 1).toFixed(1)} bits
               </text>
-              <text x="8" y="37" fontSize="9" fill="#ece8e1" fontFamily="monospace">
+              <text x="8" y="37" fontSize="9" fill="#efe4cf" fontFamily="monospace">
                 audit {ht} bits
               </text>
             </g>
@@ -190,20 +191,20 @@ export default function Research() {
             e.currentTarget.style.setProperty("--mx", `${e.clientX - r.left}px`)
             e.currentTarget.style.setProperty("--my", `${e.clientY - r.top}px`)
           }}>
-            <div ref={box} className="relative min-h-[320px] border-b border-white/[0.06] bg-[radial-gradient(ellipse_at_center,rgba(255,138,61,.08),transparent_70%)] md:min-h-[560px] md:border-b-0 md:border-r">
+            <div ref={box} className="relative min-h-[320px] border-b border-white/[0.06] bg-[radial-gradient(ellipse_at_center,rgba(212,169,79,.08),transparent_70%)] md:min-h-[560px] md:border-b-0 md:border-r">
               {webgl && <TunnelScene active={active} />}
-              <div className="pointer-events-none absolute left-5 top-5 font-mono text-[10px] uppercase tracking-[0.2em] text-bone-3">
+              <div className="pointer-events-none absolute left-5 top-5 font-type text-[10px] uppercase tracking-[0.2em] text-bone-3">
                 Deceptive reward landscape
               </div>
               <ul className="pointer-events-none absolute bottom-5 left-5 flex flex-wrap gap-2 font-mono text-[10px] text-bone-2">
-                <li className="chip border-saffron/30"><span className="mr-1.5 h-1.5 w-1.5 rounded-full bg-saffron" />Decoy peak</li>
+                <li className="chip border-brass/30"><span className="mr-1.5 h-1.5 w-1.5 rounded-full bg-brass" />Decoy peak</li>
                 <li className="chip border-white/15"><span className="mr-1.5 h-1.5 w-1.5 rounded-full bg-bone" />Agent</li>
-                <li className="chip border-glacier/30"><span className="mr-1.5 h-1.5 w-1.5 rounded-full bg-glacier" />True goal behind barrier</li>
+                <li className="chip border-scarf/30"><span className="mr-1.5 h-1.5 w-1.5 rounded-full bg-scarf" />True goal behind barrier</li>
               </ul>
             </div>
             <div className="p-6 md:p-10">
               <div className="flex flex-wrap items-center gap-2">
-                <span className="chip border-saffron/40 text-saffron">Featured study</span>
+                <span className="chip border-brass/40 text-brass">Featured study</span>
                 <span className="chip">{R.period}</span>
               </div>
               <h3 className="mt-5 font-display text-3xl tracking-tight text-bone md:text-4xl">{R.title}</h3>
@@ -212,14 +213,14 @@ export default function Research() {
               <ul className="mt-5 grid gap-2 text-[14px] text-bone-2">
                 {R.details.map((d) => (
                   <li key={d} className="flex gap-3">
-                    <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-saffron" />
+                    <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-brass" />
                     {d}
                   </li>
                 ))}
               </ul>
               <ResultsChart />
               <p className="mt-6 font-mono text-[11px] text-bone-3">{R.role} · {R.guide}</p>
-              <a href={R.link} target="_blank" rel="noreferrer" className="link-underline mt-4 inline-block text-sm text-bone hover:text-saffron">
+              <a href={R.link} target="_blank" rel="noreferrer" className="link-underline mt-4 inline-block text-sm text-bone hover:text-brass">
                 Code &amp; comparative demo on GitHub ↗
               </a>
             </div>
@@ -230,7 +231,7 @@ export default function Research() {
           <article className="card grid gap-8 p-6 md:grid-cols-2 md:p-10">
             <div>
               <div className="flex flex-wrap items-center gap-2">
-                <span className="chip border-glacier/40 text-glacier">Theory · 2026 preprint</span>
+                <span className="chip border-scarf/40 text-scarf">Theory · 2026 preprint</span>
                 <span className="chip">with S. M. R. Prakash &amp; S. M. Asad</span>
               </div>
               <h3 className="mt-5 font-display text-2xl tracking-tight text-bone md:text-3xl">
@@ -245,7 +246,7 @@ export default function Research() {
                 href={`${GH}/predictive-state-not-explanatory-state`}
                 target="_blank"
                 rel="noreferrer"
-                className="link-underline mt-5 inline-block text-sm text-bone hover:text-saffron"
+                className="link-underline mt-5 inline-block text-sm text-bone hover:text-brass"
               >
                 Paper &amp; verification code ↗
               </a>

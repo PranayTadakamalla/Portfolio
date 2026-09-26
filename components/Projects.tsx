@@ -18,7 +18,7 @@ function seeded(name: string) {
 function Art({ name, category }: { name: string; category: Project["category"] }) {
   const { lines, orbit } = useMemo(() => {
     const r = seeded(name)
-    const hueA = category === "Security" ? "#6ee7f9" : "#ff8a3d"
+    const hueA = category === "Security" ? "#8fb3d9" : "#d4a94f"
     const lines = Array.from({ length: 14 }, (_, i) => {
       const y0 = 10 + i * 8 + r() * 4
       const amp = 6 + r() * 18
@@ -28,7 +28,7 @@ function Art({ name, category }: { name: string; category: Project["category"] }
         const x = k * 10
         return `${k ? "L" : "M"}${x},${(y0 + Math.sin(x * f + ph) * amp * (0.4 + (k / 40) * 0.8)).toFixed(1)}`
       }).join("")
-      return { d, o: 0.15 + r() * 0.45, c: r() > 0.7 ? hueA : "#ece8e1" }
+      return { d, o: 0.15 + r() * 0.45, c: r() > 0.7 ? hueA : "#efe4cf" }
     })
     return { lines, orbit: { cx: 260 + r() * 100, cy: 30 + r() * 60, r: 22 + r() * 30, c: hueA } }
   }, [name, category])
@@ -76,11 +76,11 @@ function Card({ p, i }: { p: Project; i: number }) {
         <div className="absolute inset-0 bg-gradient-to-t from-ink-2 to-transparent" />
         <span className="absolute left-5 top-4 font-mono text-[11px] text-bone-3">{String(i + 1).padStart(2, "0")}</span>
         {p.highlight && (
-          <span className="absolute right-4 top-4 rounded-full bg-saffron px-3 py-1 font-mono text-[10px] font-medium text-ink">{p.highlight}</span>
+          <span className="absolute right-4 top-4 rounded-full bg-brass px-3 py-1 font-mono text-[10px] font-medium text-ink">{p.highlight}</span>
         )}
       </div>
       <div className="flex flex-1 flex-col p-6">
-        <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-bone-3">{p.kind}</p>
+        <p className="font-type text-[10px] uppercase tracking-[0.2em] text-bone-3">{p.kind}</p>
         <h3 className="mt-2 font-display text-2xl tracking-tight text-bone">{p.name}</h3>
         <p className="mt-3 flex-1 text-[14px] leading-relaxed text-bone-2">{p.body}</p>
         <ul className="mt-5 flex flex-wrap gap-1.5">
@@ -92,12 +92,12 @@ function Card({ p, i }: { p: Project; i: number }) {
         </ul>
         <div className="mt-6 flex items-center gap-4 border-t border-white/[0.06] pt-4 text-[13px]">
           {p.href && (
-            <a href={p.href} target="_blank" rel="noreferrer" className="link-underline text-bone hover:text-saffron">
+            <a href={p.href} target="_blank" rel="noreferrer" className="link-underline text-bone hover:text-brass">
               Code ↗
             </a>
           )}
           {p.demo && (
-            <a href={p.demo} target="_blank" rel="noreferrer" className="link-underline text-bone hover:text-saffron">
+            <a href={p.demo} target="_blank" rel="noreferrer" className="link-underline text-bone hover:text-brass">
               Live demo ↗
             </a>
           )}
@@ -117,7 +117,7 @@ export default function Projects() {
       <div className="wrap">
         <div id="projects-title">
           <SectionHeader
-            index="06"
+            index="04"
             eyebrow="Projects"
             title="Things I've built"
             accent="from my GitHub."
@@ -155,7 +155,7 @@ export default function Projects() {
             href={GH}
             target="_blank"
             rel="noreferrer"
-            className="inline-flex items-center gap-3 rounded-full border border-white/15 px-6 py-3 text-sm text-bone transition-colors hover:border-saffron hover:text-saffron"
+            className="inline-flex items-center gap-3 rounded-full border border-white/15 px-6 py-3 text-sm text-bone transition-colors hover:border-brass hover:text-brass"
           >
             All repositories on GitHub ↗
           </a>

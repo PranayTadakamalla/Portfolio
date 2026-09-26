@@ -351,17 +351,16 @@ export const languages = [
   { name: "English", level: "B2 · Professional" },
 ]
 
-export const quotes = [
-  {
-    text: "That is whole; this is whole. From the whole, the whole arises. Take the whole from the whole, and the whole remains.",
-    source: "Īśa Upaniṣad, invocation",
-    note: "The line behind my paper “The Fullness That Remains”.",
-  },
-  {
-    text: "The best way to predict the future is to invent it.",
-    source: "Alan Kay",
-  },
-]
+export const quotes = {
+  holmes: [
+    { text: "It is a capital mistake to theorize before one has data.", source: "Sherlock Holmes, A Scandal in Bohemia" },
+    { text: "You see, but you do not observe.", source: "Sherlock Holmes, A Scandal in Bohemia" },
+  ],
+  kay: { text: "The best way to predict the future is to invent it.", source: "Alan Kay" },
+}
+
+// Add your own poems here — the Writing page shows this notebook automatically once it has entries.
+export const poems: { title: string; lines: string[] }[] = []
 
 export const beyond = {
   intro:

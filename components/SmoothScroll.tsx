@@ -1,6 +1,7 @@
 "use client"
 
-import { useEffect } from "react"
+import { useEffect, useRef } from "react"
+import { usePathname } from "next/navigation"
 import Lenis from "lenis"
 import { gsap } from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
@@ -20,6 +21,16 @@ export function scrollToId(id: string) {
 
 // Lenis drives the page; GSAP's ticker drives Lenis so ScrollTrigger stays in lockstep.
 export default function SmoothScroll() {
+  const pathname = usePathname()
+  const first = useRef(true)
+  // New page, new case: start at the top and let ScrollTrigger re-measure.
+  useEffect(() => {
+    if (first.current) first.current = false
+    else document.documentElement.classList.remove("fresh")
+    window.__lenis?.scrollTo(0, { immediate: true })
+    requestAnimationFrame(() => ScrollTrigger.refresh())
+  }, [pathname])
+
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger)
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return
