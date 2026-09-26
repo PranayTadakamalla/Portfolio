@@ -1,28 +1,26 @@
-import Hero from "./components/Hero"
-import About from "./components/About"
-import Experience from "./components/Experience"
-import Skills from "./components/Skills"
-import Certifications from "./components/Certifications"
-import Education from "./components/Education"
-import Research from "./components/Research"
-import Contact from "./components/Contact"
-import Projects from "./components/Projects"
-import Languages from "./components/Languages"
-import ThreeScene from "./components/ThreeScene"
+import Hero from "@/components/Hero"
+import About from "@/components/About"
+import Research from "@/components/Research"
+import Publications from "@/components/Publications"
+import Venture from "@/components/Venture"
+import Journey from "@/components/Journey"
+import Projects from "@/components/Projects"
+import Skills from "@/components/Skills"
+import Beyond from "@/components/Beyond"
+import Contact from "@/components/Contact"
 
 export default function Home() {
   return (
-    <main className="bg-slate-950 min-h-screen">
-      <ThreeScene />
+    <main id="main" className="relative">
       <Hero />
       <About />
-      <Experience />
-      <Skills />
-      <Education />
       <Research />
-      <Certifications />
+      <Publications />
+      <Venture />
+      <Journey />
       <Projects />
-      <Languages />
+      <Skills />
+      <Beyond />
       <Contact />
     </main>
   )
