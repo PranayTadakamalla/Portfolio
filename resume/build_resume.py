@@ -144,8 +144,9 @@ story += [
         "Generates code in Python, Java, TypeScript, React, AngularJS and Node.js through a secure, scalable API backend."]),
     entry("<b>AADHARVA</b> — AI Digital Hub for Rural Advancement | <i>Next.js, Python, Google APIs</i> | " + link(f"{GH}/AADHARVA", "GitHub"), "", [
         "Multilingual conversational assistant that guides rural users through digital services."]),
-    entry("<b>CharChiru</b> — AI Video Generation Platform | <i>React, TypeScript, Node.js, Gemini API</i> | " + link(f"{GH}/CharChiru", "GitHub"), "", [
-        "Turns text prompts into styled short videos through a minimal, creator-focused interface."]),
+    entry("<b>CertChain</b> — Blockchain Credential Verification | <i>Solidity, ethers.js, IPFS, PostgreSQL, Python</i>", "", [
+        "QR-coded certificates anchored on a Solidity registry via IPFS; designed H-PCAE (PCA + autoencoder + entropy "
+        "selection) to compress 256-dimensional credential records into a 32-byte SHA-256 fingerprint stored on-chain."]),
 ]
 
 story += section("Achievements &amp; Leadership")
