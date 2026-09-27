@@ -42,13 +42,15 @@ function Portrait() {
   const sry = useSpring(ry, { stiffness: 120, damping: 14 })
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] })
   const y = useTransform(scrollYProgress, [0, 1], ["-8%", "8%"])
-  const clip = useTransform(scrollYProgress, [0, 0.35], ["inset(18% 12% 18% 12% round 28px)", "inset(0% 0% 0% 0% round 28px)"])
+  // transform/opacity only (no clip-path repaint) keeps the scroll reveal on the GPU
+  const scale = useTransform(scrollYProgress, [0, 0.35], [0.86, 1])
+  const fade = useTransform(scrollYProgress, [0, 0.25], [0.35, 1])
 
   return (
     <div className="[perspective:1200px]">
       <motion.div
         ref={ref}
-        style={{ rotateX: srx, rotateY: sry, clipPath: clip }}
+        style={{ rotateX: srx, rotateY: sry, scale, opacity: fade }}
         onPointerMove={(e) => {
           if (e.pointerType !== "mouse") return
           const r = e.currentTarget.getBoundingClientRect()

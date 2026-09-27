@@ -14,27 +14,10 @@ const TIPS: Record<string, string> = {
   "/contact": "One click copies the email. Elementary.",
 }
 
-// A small flat Sherlock: deerstalker, curls, blue scarf, calabash pipe.
+// The detective's silhouette (from the hero model), in brass.
 export function SherlockFace({ className = "" }: { className?: string }) {
-  return (
-    <svg viewBox="0 0 64 64" className={className} aria-hidden>
-      <circle cx="32" cy="36" r="17" fill="#e9c7a4" />
-      <circle cx="18" cy="34" r="4" fill="#2a1d14" />
-      <circle cx="46" cy="34" r="4" fill="#2a1d14" />
-      <path d="M13 30c0-11 8.5-18 19-18s19 7 19 18c-5-2-10-3-19-3s-14 1-19 3z" fill="#6a5540" />
-      <path d="M13 30c-3 1-6 2-6 4 5 1 8-1 10-2zM51 30c3 1 6 2 6 4-5 1-8-1-10-2z" fill="#5d4a36" />
-      <path d="M20 17l24 0M18 22l28 0" stroke="#3b2e22" strokeWidth="1.2" opacity=".6" />
-      <circle cx="32" cy="11" r="2" fill="#3b2e22" />
-      <circle cx="26" cy="37" r="2.2" fill="#17120e" />
-      <circle cx="38" cy="37" r="2.2" fill="#17120e" />
-      <circle cx="26.7" cy="36.3" r=".7" fill="#fff" />
-      <circle cx="38.7" cy="36.3" r=".7" fill="#fff" />
-      <path d="M29 45c2 1.5 4 1.5 6 0" stroke="#8a4a3a" strokeWidth="1.4" fill="none" strokeLinecap="round" />
-      <path d="M36 45c3 2 6 3 9 2" stroke="#2a1a10" strokeWidth="2.2" fill="none" strokeLinecap="round" />
-      <path d="M44 42h5l-1 7h-3z" fill="#c99b52" />
-      <path d="M20 52c4 3 20 3 24 0l-2 5H22z" fill="#2c4a6e" />
-    </svg>
-  )
+  // eslint-disable-next-line @next/next/no-img-element
+  return <img src="/models/sherlock-silhouette.webp" alt="" aria-hidden className={`object-contain ${className}`} />
 }
 
 export default function Guide() {
@@ -101,7 +84,7 @@ export default function Guide() {
         whileHover={{ rotate: -8, scale: 1.08 }}
         className="grid h-14 w-14 place-items-center rounded-full border border-brass/50 bg-ink-2 shadow-[0_10px_30px_rgba(0,0,0,.5)] md:h-16 md:w-16"
       >
-        <SherlockFace className="h-12 w-12 md:h-14 md:w-14" />
+        <SherlockFace className="h-10 w-10 translate-y-0.5 md:h-12 md:w-12" />
       </motion.button>
     </div>
   )

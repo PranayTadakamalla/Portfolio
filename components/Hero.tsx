@@ -7,7 +7,6 @@ import { useEffect, useRef, useState } from "react"
 import { profile } from "@/lib/data"
 import { SplitWords } from "./ui/Reveal"
 import Magnetic from "./ui/Magnetic"
-import { SherlockFace } from "./Guide"
 
 const SherlockScene = dynamic(() => import("./three/SherlockScene"), { ssr: false })
 
@@ -42,6 +41,15 @@ export default function Hero() {
   const [webgl, setWebgl] = useState<boolean | null>(null)
   const [role, setRole] = useState(0)
   const [line, setLine] = useState<string | null>(null)
+  const [mount3d, setMount3d] = useState(false)
+  const [ready, setReady] = useState(false)
+
+  // Mount the 3D scene only once the loader has finished, so they never compete for the main thread.
+  useEffect(() => {
+    if (!loaded) return
+    const id = setTimeout(() => setMount3d(true), 250)
+    return () => clearTimeout(id)
+  }, [loaded])
 
   useEffect(() => {
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches
@@ -74,16 +82,17 @@ export default function Hero() {
 
       {/* Sherlock: full-bleed on desktop (camera offset puts him right), a stage above the text on mobile */}
       <motion.div
-        className="relative h-[50svh] w-full lg:absolute lg:inset-0 lg:h-auto"
+        className="relative h-[52svh] w-full [mask-image:linear-gradient(to_bottom,#000_58%,transparent_96%)] lg:[mask-image:linear-gradient(to_bottom,#000_72%,transparent)] lg:absolute lg:inset-0 lg:h-auto"
         initial={{ opacity: 0 }}
-        animate={{ opacity: loaded ? 1 : 0 }}
-        transition={{ duration: 1.6, delay: 0.3 }}
+        animate={{ opacity: loaded && (ready || webgl === false) ? 1 : 0 }}
+        transition={{ duration: 1.8, ease: [0.22, 1, 0.36, 1] }}
       >
-        {webgl ? (
-          <SherlockScene active={active} lite={lite} offsetX={wide ? 1.75 : 0} onSay={setLine} />
+        {webgl && mount3d ? (
+          <SherlockScene active={active} lite={lite} offsetX={wide ? 1.7 : 0} onSay={setLine} onReady={() => setReady(true)} />
         ) : webgl === false ? (
-          <div className="grid h-full place-items-center lg:justify-end lg:pr-[14%]">
-            <SherlockFace className="h-48 w-48 drop-shadow-[0_0_60px_rgba(212,169,79,.35)] md:h-72 md:w-72" />
+          <div className="grid h-full place-items-center lg:justify-end lg:pr-[12%]">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/models/sherlock-color.webp" alt="" className="h-[90%] w-auto object-contain drop-shadow-[0_0_60px_rgba(212,169,79,.25)]" />
           </div>
         ) : null}
         <div
