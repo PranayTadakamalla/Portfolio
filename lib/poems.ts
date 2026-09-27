@@ -455,6 +455,45 @@ export const poems: Poem[] = [
 
   /* ---------------- Heartbreak ---------------- */
   {
+    id: "if-i-see-you-again",
+    title: "If I See You Again",
+    lang: "English",
+    theme: "Heartbreak",
+    stanzas: [
+      ["If I see you again,", "will I be the storm that learned your name,", "or the silence that forgot your face?"],
+      [
+        "Will I hate you",
+        "for the nights that stitched loneliness into my skin,",
+        "or love you harder",
+        "because some wounds bloom instead of fade?",
+      ],
+      [
+        "Will I fight you",
+        "with every shattered promise we left behind,",
+        "or fight for you",
+        "like a fool chasing a sunrise that never waits?",
+      ],
+      [
+        "Perhaps I’ll walk away,",
+        "leaving your shadow to haunt empty streets,",
+        "while my heart lingers behind,",
+        "still calling yours in a language broken by goodbye.",
+      ],
+      ["I want you.", "That is my sweetest tragedy."],
+      ["I fear you.", "That is my cruelest truth."],
+      ["Because loving you", "felt like holding a flame in winter.", "It kept me alive", "while quietly turning me to ash."],
+      ["So if fate is reckless enough", "to let our eyes meet again,"],
+      ["don’t ask what I’ll choose."],
+      [
+        "My heart has buried you a thousand times,",
+        "yet every lonely night",
+        "it still kneels beside your memory,",
+        "placing fresh flowers",
+        "on a love that never learned how to die.",
+      ],
+    ],
+  },
+  {
     id: "mohabbat-ka-ilzaam",
     title: "Mohabbat Ka Ilzaam",
     subtitle: "The charge of love",
