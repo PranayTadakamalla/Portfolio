@@ -14,7 +14,7 @@ module.exports = {
       fontFamily: {
         display: ['"Playfair Display Variable"', '"Noto Sans Telugu"', "Georgia", "serif"],
         sans: ['"Inter Variable"', "system-ui", "sans-serif"],
-        serif: ['"Cormorant Garamond"', "Georgia", "serif"],
+        serif: ['"Cormorant Garamond"', '"Noto Serif Devanagari"', '"Noto Serif Telugu"', "Georgia", "serif"],
         type: ['"Special Elite"', '"Courier New"', "monospace"],
         mono: ['"JetBrains Mono Variable"', "ui-monospace", "monospace"],
       },

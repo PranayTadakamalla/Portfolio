@@ -359,9 +359,6 @@ export const quotes = {
   kay: { text: "The best way to predict the future is to invent it.", source: "Alan Kay" },
 }
 
-// Add your own poems here — the Writing page shows this notebook automatically once it has entries.
-export const poems: { title: string; lines: string[] }[] = []
-
 export const beyond = {
   intro:
     "Poetry and prose are how I think out loud — the same instinct that makes me chase an elegant proof, or a sentence that lands exactly where it should.",

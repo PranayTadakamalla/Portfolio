@@ -13,7 +13,7 @@ const BLURBS: Record<string, string> = {
   "/labs": "221B Labs: Festora and Pathana Sakthi.",
   "/projects": "Security, AI and web projects from my GitHub.",
   "/journey": "Roles, clubs, awards and education.",
-  "/writing": "Poetry, writing and the things I notice.",
+  "/writing": "34 poems in English, Hindi–Urdu and Telugu.",
   "/contact": "Say hello. My inbox is open.",
 }
 

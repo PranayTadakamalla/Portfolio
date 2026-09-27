@@ -10,7 +10,7 @@ const TIPS: Record<string, string> = {
   "/labs": "Two products, one company. Both are real and running.",
   "/projects": "Filter the evidence by type. Private repos are marked.",
   "/journey": "Scroll slowly. The timeline draws itself.",
-  "/writing": "You see, but do you observe? Read slowly here.",
+  "/writing": "Tap any poem to read it in full. Arrow keys turn the page.",
   "/contact": "One click copies the email. Elementary.",
 }
 

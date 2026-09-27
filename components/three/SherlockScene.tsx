@@ -20,7 +20,6 @@ const HEIGHT = 3.5 // world units
 const S = HEIGHT / SHERLOCK_H
 // Feature positions in the traced 1347×1425 px space (y measured from the top).
 const px = (x: number, y: number) => new THREE.Vector2((x - SHERLOCK_W / 2) * S, (SHERLOCK_H / 2 - y) * S)
-const LENS = { c: px(93, 702), rx: 70 * S, ry: 94 * S }
 const PIPE = px(534, 628)
 const DEPTH = 70
 const BEVEL = 22
@@ -54,25 +53,6 @@ function useSherlockGeometry() {
     return g
   }, [])
 }
-
-const glintMaterial = () =>
-  new THREE.ShaderMaterial({
-    transparent: true,
-    depthWrite: false,
-    blending: THREE.AdditiveBlending,
-    uniforms: { uT: { value: 0 }, uBoost: { value: 0 } },
-    vertexShader: /* glsl */ `varying vec2 vUv; void main(){ vUv = uv; gl_Position = projectionMatrix * modelViewMatrix * vec4(position,1.); }`,
-    fragmentShader: /* glsl */ `
-      varying vec2 vUv; uniform float uT; uniform float uBoost;
-      void main(){
-        vec2 p = vUv - .5; float r = length(p);
-        if (r > .5) discard;
-        float band = smoothstep(.09, 0., abs(p.x + p.y * .6 - (fract(uT * .12) * 2.2 - 1.1)));
-        float rim = smoothstep(.36, .5, r) * .25;
-        float a = (band * (.55 + uBoost) + rim) * smoothstep(.5, .46, r);
-        gl_FragColor = vec4(vec3(1., .93, .78) * a, a);
-      }`,
-  })
 
 function PipeSmoke({ origin }: { origin: THREE.Vector3 }) {
   const tex = useMemo(() => {
@@ -117,8 +97,6 @@ function Sherlock({ onPoke, shift, lift }: { onPoke: () => void; shift: number; 
   const group = useRef<THREE.Group>(null)
   const ember = useRef<THREE.PointLight>(null)
   const emberMat = useRef<THREE.MeshStandardMaterial>(null)
-  const glint = useMemo(glintMaterial, [])
-  const boost = useRef(0)
   const target = useMemo(() => new THREE.Vector2(), [])
   const frontZ = ((DEPTH / 2 + BEVEL) * S) + 0.01
   const smokeOrigin = useMemo(() => new THREE.Vector3(PIPE.x, PIPE.y + 0.05, frontZ), [frontZ])
@@ -150,9 +128,6 @@ function Sherlock({ onPoke, shift, lift }: { onPoke: () => void; shift: number; 
       group.current.rotation.y = THREE.MathUtils.lerp(group.current.rotation.y, 0.22 + target.x * 0.3, 0.06)
       group.current.rotation.x = THREE.MathUtils.lerp(group.current.rotation.x, -target.y * 0.08, 0.06)
     }
-    boost.current = Math.max(0, boost.current - dt * 0.8)
-    glint.uniforms.uT.value = t
-    glint.uniforms.uBoost.value = boost.current
     const f = 0.7 + Math.sin(t * 2.1) * 0.2 + Math.sin(t * 5.3) * 0.08
     if (ember.current) ember.current.intensity = f * 1.4
     if (emberMat.current) emberMat.current.emissiveIntensity = 1.5 + f * 2
@@ -164,23 +139,12 @@ function Sherlock({ onPoke, shift, lift }: { onPoke: () => void; shift: number; 
       position={[shift, lift, 0]}
       onClick={(e) => {
         e.stopPropagation()
-        boost.current = 1.2
         onPoke()
       }}
       onPointerOver={() => (document.body.style.cursor = "zoom-in")}
       onPointerOut={() => (document.body.style.cursor = "")}
     >
       <mesh geometry={geometry} material={[caps, sides]} castShadow />
-      {/* magnifying glass: a real lens with a travelling glint */}
-      <group position={[LENS.c.x, LENS.c.y, frontZ + 0.02]} rotation={[0, 0, -0.08]}>
-        <mesh scale={[LENS.rx, LENS.ry, 1]}>
-          <circleGeometry args={[1, 64]} />
-          <meshPhysicalMaterial color="#e8eef5" transparent opacity={0.1} roughness={0.02} metalness={0} clearcoat={1} envMapIntensity={2.5} />
-        </mesh>
-        <mesh scale={[LENS.rx * 2, LENS.ry * 2, 1]} position={[0, 0, 0.005]} material={glint}>
-          <planeGeometry args={[1, 1]} />
-        </mesh>
-      </group>
       {/* pipe ember + smoke */}
       <mesh position={[PIPE.x, PIPE.y, frontZ]}>
         <sphereGeometry args={[0.028, 12, 12]} />

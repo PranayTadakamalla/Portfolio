@@ -23,6 +23,12 @@ importers:
       '@fontsource/noto-sans-telugu':
         specifier: ^5.3.0
         version: 5.3.0
+      '@fontsource/noto-serif-devanagari':
+        specifier: ^5.3.0
+        version: 5.3.0
+      '@fontsource/noto-serif-telugu':
+        specifier: ^5.3.0
+        version: 5.3.0
       '@fontsource/special-elite':
         specifier: ^5.3.0
         version: 5.3.0
@@ -183,6 +189,12 @@ packages:
 
   '@fontsource/noto-sans-telugu@5.3.0':
     resolution: {integrity: sha512-D5AD91Ok2wURk6Vf4sOe2KA3nf0M7qePboNVuvJbguOqLAplh3cGkEIX1qi9u1Jjcz9QWblQ5BbTXI/c+QjB9Q==}
+
+  '@fontsource/noto-serif-devanagari@5.3.0':
+    resolution: {integrity: sha512-POketgM+TcAbtQCpl5GUmlCVvV7zGnFmLlQTIVxp0ePZkKTJ1UhpeyscIpgljOzHjrVzXPj7x1lSXl2W/wI3Gg==}
+
+  '@fontsource/noto-serif-telugu@5.3.0':
+    resolution: {integrity: sha512-/svhIKXbxW9F9cz/zYj0uiB1lBDlul9krYFGxrhdZn0Kyyss7lzYL7PXMJKiD1IlCCEzhg8MvDh3SsJT6bYJXQ==}
 
   '@fontsource/special-elite@5.3.0':
     resolution: {integrity: sha512-fOQ9XU8m4KnqzcLibAXCxTsKzbxePNDjPqVss5GSMcPVCY1TuCv+Wq8gm1ebqIR6XS1rhMbQ7ECP9ocKVEEpTA==}
@@ -2584,6 +2596,10 @@ snapshots:
   '@fontsource/cormorant-garamond@5.3.0': {}
 
   '@fontsource/noto-sans-telugu@5.3.0': {}
+
+  '@fontsource/noto-serif-devanagari@5.3.0': {}
+
+  '@fontsource/noto-serif-telugu@5.3.0': {}
 
   '@fontsource/special-elite@5.3.0': {}
 

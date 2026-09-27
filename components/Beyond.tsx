@@ -2,7 +2,7 @@
 
 import { motion, useScroll, useTransform } from "motion/react"
 import { useRef } from "react"
-import { beyond, poems, quotes } from "@/lib/data"
+import { beyond, quotes } from "@/lib/data"
 import SectionHeader from "./ui/SectionHeader"
 import { Reveal, SplitWords } from "./ui/Reveal"
 
@@ -14,7 +14,7 @@ export default function Beyond() {
   const q = quotes.holmes[1]
 
   return (
-    <section id="writing" className="section" aria-labelledby="writing-title">
+    <section id="writing" className="section overflow-x-clip" aria-labelledby="writing-title">
       <div className="wrap">
         <div id="writing-title">
           <SectionHeader index="06" eyebrow="Beyond the code" title="Poetry" accent="& writing." intro={beyond.intro} />
@@ -42,22 +42,6 @@ export default function Beyond() {
           </figure>
         </div>
 
-        {poems.length > 0 && (
-          <div className="mt-24 grid gap-6 md:grid-cols-2">
-            {poems.map((p, i) => (
-              <Reveal key={p.title} delay={i * 0.08}>
-                <article className="card h-full p-8">
-                  <h3 className="font-display text-2xl text-bone">{p.title}</h3>
-                  <div className="mt-5 space-y-1 font-serif text-xl italic leading-relaxed text-bone-2">
-                    {p.lines.map((l, k) => (
-                      <p key={k}>{l}</p>
-                    ))}
-                  </div>
-                </article>
-              </Reveal>
-            ))}
-          </div>
-        )}
 
         <ul className="mt-24 grid gap-px overflow-hidden rounded-3xl border border-white/[0.08] bg-white/[0.06] sm:grid-cols-2 lg:grid-cols-4">
           {beyond.hobbies.map((h, i) => (
