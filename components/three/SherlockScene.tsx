@@ -21,6 +21,7 @@ const S = HEIGHT / SHERLOCK_H
 // Feature positions in the traced 1347×1425 px space (y measured from the top).
 const px = (x: number, y: number) => new THREE.Vector2((x - SHERLOCK_W / 2) * S, (SHERLOCK_H / 2 - y) * S)
 const PIPE = px(534, 628)
+const GRIP = px(184, 950) // the empty fist where the magnifier used to be
 const DEPTH = 70
 const BEVEL = 22
 
@@ -91,6 +92,98 @@ function PipeSmoke({ origin }: { origin: THREE.Vector3 }) {
   )
 }
 
+// A folded case note in his fist: bent plane, parchment canvas texture, gentle flutter.
+function Paper({ z }: { z: number }) {
+  const W = 0.54
+  const H = 0.74
+  const ref = useRef<THREE.Group>(null)
+  const geometry = useMemo(() => {
+    const g = new THREE.PlaneGeometry(W, H, 16, 24)
+    const pos = g.attributes.position as THREE.BufferAttribute
+    for (let i = 0; i < pos.count; i++) {
+      const x = pos.getX(i)
+      const y = pos.getY(i)
+      const v = (y + H / 2) / H
+      // soft curl across the width + the ridges of a letter folded in thirds
+      const curl = Math.pow((x / W) * 2, 2) * 0.035
+      const crease = Math.max(0, 0.02 - Math.abs(v - 1 / 3) * 0.3) - Math.max(0, 0.02 - Math.abs(v - 2 / 3) * 0.3)
+      pos.setZ(i, curl + crease + v * v * 0.05)
+    }
+    g.translate(0, H / 2 - 0.12, 0) // pivot near the bottom, where the fingers grip
+    g.computeVertexNormals()
+    return g
+  }, [])
+  const map = useMemo(() => {
+    const c = document.createElement("canvas")
+    c.width = 512
+    c.height = 700
+    const g = c.getContext("2d")!
+    const bg = g.createRadialGradient(256, 330, 60, 256, 350, 460)
+    bg.addColorStop(0, "#efe2c4")
+    bg.addColorStop(1, "#c9b288")
+    g.fillStyle = bg
+    g.fillRect(0, 0, 512, 700)
+    // fibres and age spots
+    for (let i = 0; i < 900; i++) {
+      g.fillStyle = `rgba(110,80,40,${Math.random() * 0.06})`
+      g.fillRect(Math.random() * 512, Math.random() * 700, 1 + Math.random() * 3, 1)
+    }
+    // fold shadows
+    for (const y of [233, 466]) {
+      const f = g.createLinearGradient(0, y - 10, 0, y + 10)
+      f.addColorStop(0, "rgba(90,60,30,0)")
+      f.addColorStop(0.5, "rgba(90,60,30,.22)")
+      f.addColorStop(1, "rgba(255,245,220,0)")
+      g.fillStyle = f
+      g.fillRect(0, y - 10, 512, 20)
+    }
+    g.fillStyle = "#2a1d12"
+    g.font = "italic 600 44px 'Cormorant Garamond', Georgia, serif"
+    g.fillText("Case notes —", 48, 92)
+    g.font = "22px 'Special Elite', 'Courier New', monospace"
+    g.fillStyle = "rgba(42,29,18,.7)"
+    g.fillText("221B BAKER ST.", 50, 132)
+    // hand-written lines: wobbly ink strokes of varying length
+    g.strokeStyle = "rgba(34,24,16,.78)"
+    g.lineWidth = 3
+    g.lineCap = "round"
+    for (let row = 0; row < 11; row++) {
+      const y = 190 + row * 42
+      const end = 440 - (row % 4 === 3 ? 170 : Math.random() * 70)
+      g.beginPath()
+      g.moveTo(50, y)
+      for (let x = 50; x < end; x += 9) g.lineTo(x, y + Math.sin(x * 0.21 + row) * 4 + Math.sin(x * 0.07) * 2)
+      g.stroke()
+    }
+    // a red circle round one clue
+    g.strokeStyle = "rgba(140,30,30,.8)"
+    g.lineWidth = 4
+    g.beginPath()
+    g.ellipse(300, 400, 90, 26, -0.05, 0, Math.PI * 2)
+    g.stroke()
+    const t = new THREE.CanvasTexture(c)
+    t.colorSpace = THREE.SRGBColorSpace
+    t.anisotropy = 8
+    return t
+  }, [])
+
+  useFrame((state) => {
+    const t = state.clock.elapsedTime
+    if (ref.current) {
+      ref.current.rotation.z = 0.28 + Math.sin(t * 0.9) * 0.03
+      ref.current.rotation.x = -0.12 + Math.sin(t * 1.3 + 1) * 0.04
+    }
+  })
+
+  return (
+    <group ref={ref} position={[GRIP.x, GRIP.y, z]} rotation={[-0.12, 0.35, 0.28]}>
+      <mesh geometry={geometry} castShadow>
+        <meshStandardMaterial map={map} side={THREE.DoubleSide} roughness={0.92} emissive="#3a2a14" emissiveIntensity={0.55} />
+      </mesh>
+    </group>
+  )
+}
+
 function Sherlock({ onPoke, shift, lift }: { onPoke: () => void; shift: number; lift: number }) {
   const geometry = useSherlockGeometry()
   const [color, normal] = useTexture(["/models/sherlock-color.webp", "/models/sherlock-normal.webp"])
@@ -145,6 +238,7 @@ function Sherlock({ onPoke, shift, lift }: { onPoke: () => void; shift: number; 
       onPointerOut={() => (document.body.style.cursor = "")}
     >
       <mesh geometry={geometry} material={[caps, sides]} castShadow />
+      <Paper z={0} />
       {/* pipe ember + smoke */}
       <mesh position={[PIPE.x, PIPE.y, frontZ]}>
         <sphereGeometry args={[0.028, 12, 12]} />
