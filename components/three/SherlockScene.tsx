@@ -92,26 +92,58 @@ function PipeSmoke({ origin }: { origin: THREE.Vector3 }) {
 }
 
 // A sheet of paper in his fist, cut from the same silhouette: same extrusion, bevel and near-black finish.
-const PAPER: [number, number][] = [
-  [118, 985], [102, 930], [88, 874], [75, 818], [66, 762], [58, 705], [52, 648], [78, 643], [104, 637], [129, 628], [154, 618], [178, 606], [212, 652], [229, 700], [243, 749], [256, 798], [265, 848], [271, 899], [276, 950],
-]
+// A thin folded letter in his fist, cut from the same silhouette (near-black face, brass edge).
+// Two panels meet at a centre crease; the top-right corner is folded over as a flap. y from the top.
+const CREASE: [[number, number], [number, number]] = [[197, 968], [115, 630]]
+const PAPER_L: [number, number][] = [[197, 968], [118, 985], [102, 930], [88, 874], [75, 818], [66, 762], [58, 705], [52, 648], [78, 643], [104, 637], [115, 630]]
+const PAPER_R: [number, number][] = [[115, 630], [129, 628], [150, 619], [234, 718], [243, 749], [256, 798], [265, 848], [271, 899], [276, 950], [197, 968]]
+const FOLD = 0.32 // radians each panel tips back from the crease
+
 function usePaperGeometry() {
   return useMemo(() => {
-    // same y-up outline space as the traced path, so it lines up with the fist
-    const shape = new THREE.Shape(PAPER.map(([x, y]) => new THREE.Vector2(x, SHERLOCK_H - y)))
-    const depth = DEPTH - 24
-    const g = new THREE.ExtrudeGeometry(shape, {
-      depth,
-      bevelEnabled: true,
-      bevelThickness: BEVEL,
-      bevelSize: 6,
-      bevelSegments: 5,
-      curveSegments: 6,
+    const up = ([x, y]: [number, number]) => new THREE.Vector2(x, SHERLOCK_H - y)
+    const sheet = (pts: THREE.Vector2[], z: number) => {
+      const g = new THREE.ExtrudeGeometry(new THREE.Shape(pts), {
+        depth: 2,
+        bevelEnabled: true,
+        bevelThickness: 1.5,
+        bevelSize: 1.5,
+        bevelSegments: 1,
+        curveSegments: 4,
+      })
+      g.translate(0, 0, z - 1)
+      return g
+    }
+    // the dog-ear: reflect the missing corner across the fold line so the flap lies on the right panel
+    const [p1, p2, p3, p4] = [up([129, 628]), up([150, 619]), up([234, 718]), up([243, 749])]
+    const corner = (() => {
+      const d1 = p2.clone().sub(p1)
+      const d2 = p3.clone().sub(p4)
+      const t = ((p4.x - p1.x) * d2.y - (p4.y - p1.y) * d2.x) / (d1.x * d2.y - d1.y * d2.x)
+      return p1.clone().add(d1.multiplyScalar(t))
+    })()
+    const axis = p3.clone().sub(p2).normalize()
+    const rel = corner.clone().sub(p2)
+    const folded = p2.clone().add(axis.clone().multiplyScalar(2 * rel.dot(axis))).sub(rel)
+
+    const c0 = up(CREASE[0])
+    const c1 = up(CREASE[1])
+    const dir = new THREE.Vector3(c1.x - c0.x, c1.y - c0.y, 0).normalize()
+    const hinge = (g: THREE.BufferGeometry, angle: number) =>
+      g
+        .translate(-c0.x, -c0.y, 0)
+        .applyMatrix4(new THREE.Matrix4().makeRotationAxis(dir, angle))
+        .translate(c0.x, c0.y, 0)
+
+    return [
+      hinge(sheet(PAPER_L.map(up), 0), -FOLD),
+      hinge(sheet(PAPER_R.map(up), 0), FOLD),
+      hinge(sheet([p2, p3, folded], 5), FOLD * 1.6),
+    ].map((g) => {
+      g.translate(-SHERLOCK_W / 2, -SHERLOCK_H / 2, 0).scale(S, S, S)
+      g.computeVertexNormals()
+      return g
     })
-    g.translate(-SHERLOCK_W / 2, -SHERLOCK_H / 2, -depth / 2)
-    g.scale(S, S, S)
-    g.computeVertexNormals()
-    return g
   }, [])
 }
 
@@ -144,7 +176,7 @@ function Sherlock({ onPoke, shift, lift }: { onPoke: () => void; shift: number; 
   )
   const sides = useMemo(() => new THREE.MeshStandardMaterial({ color: "#3a2c1d", roughness: 0.7, metalness: 0.25 }), [])
   const paper = usePaperGeometry()
-  const paperCaps = useMemo(() => new THREE.MeshStandardMaterial({ color: "#0c0808", roughness: 0.82, metalness: 0.05 }), [])
+  const paperCaps = useMemo(() => new THREE.MeshStandardMaterial({ color: "#1c140d", roughness: 0.7, metalness: 0.05, side: THREE.DoubleSide }), [])
 
   useFrame((state, dt) => {
     const t = state.clock.elapsedTime
@@ -171,7 +203,9 @@ function Sherlock({ onPoke, shift, lift }: { onPoke: () => void; shift: number; 
       onPointerOut={() => (document.body.style.cursor = "")}
     >
       <mesh geometry={geometry} material={[caps, sides]} castShadow />
-      <mesh geometry={paper} material={[paperCaps, sides]} castShadow />
+      {paper.map((g, i) => (
+        <mesh key={i} geometry={g} material={[paperCaps, sides]} castShadow />
+      ))}
       {/* pipe ember + smoke */}
       <mesh position={[PIPE.x, PIPE.y, frontZ]}>
         <sphereGeometry args={[0.028, 12, 12]} />
