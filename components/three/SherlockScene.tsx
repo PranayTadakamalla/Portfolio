@@ -21,6 +21,9 @@ const S = HEIGHT / SHERLOCK_H
 // Feature positions in the traced 1347×1425 px space (y measured from the top).
 const px = (x: number, y: number) => new THREE.Vector2((x - SHERLOCK_W / 2) * S, (SHERLOCK_H / 2 - y) * S)
 const PIPE = px(534, 628)
+// Magnifier in the outstretched fist: the handle runs from below the fist up to the neck under the lens.
+const HANDLE_END = px(222, 1095)
+const NECK = px(129, 826)
 const DEPTH = 70
 const BEVEL = 22
 
@@ -91,7 +94,78 @@ function PipeSmoke({ origin }: { origin: THREE.Vector3 }) {
   )
 }
 
-function Sherlock({ onPoke, shift, lift }: { onPoke: () => void; shift: number; lift: number }) {
+// A proper magnifying glass: brass rim, a slightly convex glass lens that refracts and reflects, and a turned wooden handle.
+function Magnifier({ lite }: { lite: boolean }) {
+  const R = 0.27
+  const dir = NECK.clone().sub(HANDLE_END)
+  const handleLen = dir.length()
+  const angle = Math.atan2(dir.y, dir.x) - Math.PI / 2 // local +y points from the handle end to the neck
+  const lens = useMemo(() => {
+    // biconvex lens: a flattened sphere, thicker in the middle
+    const g = new THREE.SphereGeometry(R * 0.97, 48, 24)
+    g.scale(1, 1, 0.12)
+    return g
+  }, [])
+  const glass = useMemo(
+    () =>
+      new THREE.MeshPhysicalMaterial({
+        color: "#f4efe4",
+        metalness: 0,
+        roughness: 0.02,
+        transmission: lite ? 0 : 1,
+        transparent: lite,
+        opacity: lite ? 0.28 : 1,
+        thickness: 0.18,
+        ior: 1.52,
+        clearcoat: 1,
+        clearcoatRoughness: 0.02,
+        specularIntensity: 1,
+        envMapIntensity: 2.2,
+        attenuationColor: new THREE.Color("#fff3d6"),
+        attenuationDistance: 1.5,
+      }),
+    [lite],
+  )
+  const brass = useMemo(() => new THREE.MeshStandardMaterial({ color: "#c9973d", metalness: 1, roughness: 0.28, envMapIntensity: 1.6 }), [])
+  const wood = useMemo(() => new THREE.MeshStandardMaterial({ color: "#3b2414", metalness: 0.1, roughness: 0.45 }), [])
+
+  return (
+    <group position={[HANDLE_END.x, HANDLE_END.y, 0.02]} rotation={[0, 0, angle]}>
+      {/* handle: wooden grip, brass end cap and collar */}
+      <mesh position={[0, handleLen * 0.45, 0]} material={wood}>
+        <cylinderGeometry args={[0.038, 0.03, handleLen * 0.9, 20]} />
+      </mesh>
+      <mesh position={[0, 0.005, 0]} material={brass}>
+        <sphereGeometry args={[0.036, 16, 12]} />
+      </mesh>
+      <mesh position={[0, handleLen * 0.93, 0]} material={brass}>
+        <cylinderGeometry args={[0.03, 0.042, handleLen * 0.1, 20]} />
+      </mesh>
+      {/* lens, facing the viewer, turned a little so the rim reads as a ring */}
+      <group position={[0, handleLen + R, 0]} rotation={[0, 0.35, 0]}>
+        <mesh material={brass}>
+          <torusGeometry args={[R, 0.028, 20, 80]} />
+        </mesh>
+        <mesh geometry={lens} material={glass} />
+        {/* reflections on the curved glass: a soft arc and a small hot spot */}
+        <mesh position={[0, 0, R * 0.13]} rotation={[0, 0, 0.5]}>
+          <ringGeometry args={[R * 0.58, R * 0.72, 48, 1, 0, Math.PI * 0.5]} />
+          <meshBasicMaterial color="#fff6e2" transparent opacity={0.22} blending={THREE.AdditiveBlending} depthWrite={false} />
+        </mesh>
+        <mesh position={[-R * 0.38, R * 0.42, R * 0.13]}>
+          <circleGeometry args={[R * 0.07, 24]} />
+          <meshBasicMaterial color="#fff6e2" transparent opacity={0.4} blending={THREE.AdditiveBlending} depthWrite={false} />
+        </mesh>
+        <mesh position={[0, 0, R * 0.13]} rotation={[0, 0, 0.5 + Math.PI]}>
+          <ringGeometry args={[R * 0.7, R * 0.78, 48, 1, 0, Math.PI * 0.3]} />
+          <meshBasicMaterial color="#ffd9a0" transparent opacity={0.12} blending={THREE.AdditiveBlending} depthWrite={false} />
+        </mesh>
+      </group>
+    </group>
+  )
+}
+
+function Sherlock({ onPoke, shift, lift, lite }: { onPoke: () => void; shift: number; lift: number; lite: boolean }) {
   const geometry = useSherlockGeometry()
   const [color, normal] = useTexture(["/models/sherlock-color.webp", "/models/sherlock-normal.webp"])
   const group = useRef<THREE.Group>(null)
@@ -145,6 +219,7 @@ function Sherlock({ onPoke, shift, lift }: { onPoke: () => void; shift: number; 
       onPointerOut={() => (document.body.style.cursor = "")}
     >
       <mesh geometry={geometry} material={[caps, sides]} castShadow />
+      <Magnifier lite={lite} />
       {/* pipe ember + smoke */}
       <mesh position={[PIPE.x, PIPE.y, frontZ]}>
         <sphereGeometry args={[0.028, 12, 12]} />
@@ -258,7 +333,7 @@ export default function SherlockScene({
       <LightShaft />
       <Suspense fallback={null}>
         <Float speed={1.1} rotationIntensity={0.04} floatIntensity={0.18} floatingRange={[-0.03, 0.04]}>
-          <Sherlock onPoke={poke} shift={offsetX === 0 ? 0.75 : 0} lift={offsetX === 0 ? -0.35 : 0} />
+          <Sherlock onPoke={poke} lite={lite} shift={offsetX === 0 ? 1.35 : 0} lift={offsetX === 0 ? -0.35 : 0} />
         </Float>
       </Suspense>
       <Sparkles count={lite ? 30 : 70} scale={[6, 5, 3]} position={[1, 0.6, -1]} size={2} speed={0.18} color="#e6c77f" opacity={0.45} />
