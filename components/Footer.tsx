@@ -23,6 +23,7 @@ export default function Footer() {
           <a href={`mailto:${profile.email}`} className="link-underline w-fit text-bone-2 hover:text-bone">{profile.email}</a>
           <a href={profile.links.github} target="_blank" rel="noreferrer" className="link-underline w-fit text-bone-2 hover:text-bone">GitHub ↗</a>
           <a href={profile.links.linkedin} target="_blank" rel="noreferrer" className="link-underline w-fit text-bone-2 hover:text-bone">LinkedIn ↗</a>
+          <a href={profile.links.instagram} target="_blank" rel="noreferrer" className="link-underline w-fit text-bone-2 hover:text-bone">Instagram ↗</a>
         </div>
       </div>
       <div className="wrap overflow-hidden pt-10">

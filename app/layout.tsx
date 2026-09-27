@@ -49,7 +49,7 @@ const jsonLd = {
   image: `${SITE}/img/pranay-640.webp`,
   jobTitle: "Founder & CEO, 221B Labs Private Limited",
   alumniOf: "Malla Reddy University",
-  sameAs: [profile.links.github, profile.links.linkedin, profile.links.orcid, profile.links.ssrn],
+  sameAs: [profile.links.github, profile.links.linkedin, profile.links.instagram, profile.links.orcid, profile.links.ssrn],
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

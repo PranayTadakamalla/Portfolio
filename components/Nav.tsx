@@ -132,6 +132,7 @@ export default function Nav() {
               <a href={profile.resume} download className="rounded-full border border-white/15 px-4 py-2">Résumé ↓</a>
               <a href={`mailto:${profile.email}`} className="rounded-full border border-white/15 px-4 py-2">Email</a>
               <a href={profile.links.linkedin} target="_blank" rel="noreferrer" className="rounded-full border border-white/15 px-4 py-2">LinkedIn</a>
+              <a href={profile.links.instagram} target="_blank" rel="noreferrer" className="rounded-full border border-white/15 px-4 py-2">Instagram</a>
             </div>
           </motion.div>
         )}

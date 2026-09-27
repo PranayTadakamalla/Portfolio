@@ -15,6 +15,7 @@ export const profile = {
   links: {
     github: GH,
     linkedin: "https://www.linkedin.com/in/sai-pranay-tadakamalla-7570bb1a6/",
+    instagram: "https://www.instagram.com/tedious.one",
     orcid: "https://orcid.org/0009-0008-6521-9122",
     ssrn: "https://papers.ssrn.com/sol3/cf_dev/AbsByAuth.cfm?per_id=7869428",
     company: "https://221blabs.com",

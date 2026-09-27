@@ -75,6 +75,7 @@ export default function Contact() {
               {[
                 ["GitHub", profile.links.github],
                 ["LinkedIn", profile.links.linkedin],
+                ["Instagram", profile.links.instagram],
                 ["ORCID", profile.links.orcid],
                 ["SSRN", profile.links.ssrn],
               ].map(([l, h]) => (
